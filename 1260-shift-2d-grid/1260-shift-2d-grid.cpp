@@ -1,34 +1,21 @@
 class Solution {
 public:
-    vector<vector<int>> shiftGrid(vector<vector<int>>& g, int k) {
-        while(k--)
-        {
-            int t = g[0][0];
-            int i = 0;
-            int j = 0;
-            while(i<g.size())
-            {
-                if(i==g.size()-1 && j==g[0].size()-1)
-                {
-                    g[0][0]=t;
-                    break;
-                }
-                if(j+1<g[0].size())
-                {
+     vector<vector<int>> shiftGrid(vector<vector<int>>& grid, int k) {
+        int n=grid.size();
+        int m=grid[0].size();
+        vector<vector<int>> ans(n,vector<int>(m));
         
-                    swap(t,g[i][j+1]);
-                    ++j;
-                    
-                }
-                else
-                {
-                    i+=1;
-                    j=0;
-                    swap(t,g[i][j]);
-                }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                
+                int newJ=(j+k)%m; // (j + numbers of columns added)%m
+                
+                int newI=(i+(j+k)/m)%n; // (i + numbers of rows added)%n 
+                
+                ans[newI][newJ]=grid[i][j];
             }
         }
-        return g;
+        return ans;
     }
 
 };
