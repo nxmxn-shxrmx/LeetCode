@@ -2,6 +2,7 @@ class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
         vector<int>v(nums.size());
+        int c  =0;
         
         for(int i = 0;i<nums.size();++i)
         {
@@ -11,10 +12,8 @@ public:
                 if(nums[j]<nums[i])
                     v[i] = max(v[j]+1,v[i]);
             }
+            c = max(c,v[i]);
         }
-        int c = 0;
-        for(auto x:v)
-            c = max(c,x);
         
         return c;
             
