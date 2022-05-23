@@ -120,8 +120,8 @@ class Solution
         if(m[r]==0)
         m[r] = root->data,g[r]=c;
         
-        in(root->right,r+1,c+1);
         in(root->left,r-1,c+1);
+        in(root->right,r+1,c+1);
     }
     vector<int> topView(Node *root)
     {
