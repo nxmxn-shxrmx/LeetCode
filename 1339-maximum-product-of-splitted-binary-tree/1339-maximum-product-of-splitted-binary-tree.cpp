@@ -12,31 +12,25 @@
 class Solution {
 public:
     long long sum= 0;
+    long long res;
     long long mod = 1e9+7;
-    map<TreeNode*,long long>m;
     long long in(TreeNode* r)
     {
         if(r==NULL)
             return 0;
-        m[r] =  r->val+in(r->left)+in(r->right);
-        return m[r];
-    }
-    long long ds(TreeNode* r)
-    {
-        if(r==NULL)
-            return 0;
-        long long s = m[r];
-        long long h = (sum-s)*s;
+        long long s=  r->val+in(r->left)+in(r->right);
         
-        h = max(h,max(ds(r->left),ds(r->right)));
-        return h;
+        res = max(res,s*(sum-s));
+        
+        return s;
     }
+   
     int maxProduct(TreeNode* root) {
         
         if(root==NULL)
             return 0;
         sum = in(root);
-        
-        return (max(ds(root->left),ds(root->right)))%mod;
+        in(root);
+        return res%mod;
     }
 };
