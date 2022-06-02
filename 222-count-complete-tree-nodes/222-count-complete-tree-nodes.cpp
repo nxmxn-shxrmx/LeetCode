@@ -16,6 +16,21 @@ public:
         if(root==NULL)
             return 0;
         
+        TreeNode* l=root;
+        TreeNode* r=root;
+        int h1=0,h2=0;
+        while(l)
+        {
+            l = l->left;
+            h1++;
+        }
+        while(r)
+        {
+            r = r->right;
+            h2++;
+        }
+        if(h1==h2)
+            return pow(2,h1)+.25-1;
         return countNodes(root->left)+countNodes(root->right)+1;
     }
 };
