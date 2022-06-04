@@ -124,35 +124,45 @@ class Solution
 {
   public:
     //Function to convert binary tree into circular doubly linked list.
-    Node* he = NULL;
-    Node* re = he;
-    void in(Node* root)
+    
+    Node* h =NULL;
+    Node* ta=NULL;
+    
+    void in(Node* n)
     {
-        if(root==NULL)
+        if(n==NULL)
         return;
         
-        in(root->left);
-        if(he==NULL)
-        {
-            he =root;
-            re =root;
-        }
+        in(n->left);
         
-        else
+        Node* u = new Node();
+        u->data = n->data;
+        
+        if(h==NULL)
         {
-            root->left = re;
-            re->right =root;
-            re = root;
+            h = u;
+            ta = u;
         }
-    
-        in(root->right);
+        else
+        ta->right = u,u->left =ta;
+        
+        ta = u;
+        
+        in(n->right);
+
     }
+    
     Node *bTreeToCList(Node *root)
     {
+    //add code here.
+        if(root==NULL)
+        return NULL;
+        
         in(root);
-        re->right = he;
-        he->left =  re;
-        return he;
+        
+        h->left = ta;
+        ta->right=h;
+        return h;
     }
 };
 
