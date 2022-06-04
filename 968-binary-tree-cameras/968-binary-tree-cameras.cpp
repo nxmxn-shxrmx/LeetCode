@@ -11,27 +11,28 @@
  */
 class Solution {
 public:
-    long long c = 0;
-    int in(TreeNode* r)
+    int c = 0;
+    int in(TreeNode* root)
     {
-        if(r==NULL)
+        if(root==NULL)
             return 2;
+        int l = in(root->left);
+        int r = in(root->right);
         
-        int l = in(r->left);
-        int re = in(r->right);
-        if(l==0 || re==0)
+        if(l==0 || r==0)
         {
-            c+=1;
+            c++;
             return 1;
         }
-        return l==1 || re==1 ? 2:0;
+        if(l==1 || r==1)
+            return 2;
         
+        return 0;
     }
     int minCameraCover(TreeNode* root) {
-        if(root==NULL)
-            return 0;
-        if(root->left==NULL && root->right==NULL)
-            return 1;
-        return (in(root)==0?1:0)+ c;
+        if(in(root)<1)
+            c++;
+    
+        return c;
     }
 };
