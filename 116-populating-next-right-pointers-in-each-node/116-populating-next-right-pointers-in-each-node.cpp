@@ -19,26 +19,27 @@ public:
 class Solution {
 public:
     Node* connect(Node* root) {
-        if(root==NULL)
-            return NULL;
         
-        Node* p = root;
-        
-        while(p)
+        Node* t = root;
+    
+        while(t && t->left)
         {
-            Node* t = new Node();
-            Node* w = t;
-            while(p)
+            Node* r = t;
+            Node* w = new Node();
+            Node* q=w;
+            
+            while(r)
             {
-                if(p->left)
-                    t->next = p->left,t=t->next;
-                if(p->right)
-                    t->next = p->right,t = t->next;
-                
-                p = p->next;
+                w->next=r->left;
+                w = w->next;
+                w->next = r->right;
+                w = w->next;
+                r = r->next;
             }
-            p = w->next;
+                
+            t = q->next;
         }
+        
         return root;
     }
 };
