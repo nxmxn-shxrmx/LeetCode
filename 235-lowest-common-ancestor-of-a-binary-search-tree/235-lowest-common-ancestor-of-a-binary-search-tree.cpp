@@ -14,12 +14,13 @@ public:
       
         if(root==NULL)
             return NULL;
-        if(root->val == p->val || root->val== q->val)
+        
+        if(root->val==p->val || root->val==q->val)
             return root;
-        if(lowestCommonAncestor(root->right,p,q)==NULL)
+        if(root->val>p->val && root->val>q->val)
             return lowestCommonAncestor(root->left,p,q);
         
-        else if(lowestCommonAncestor(root->left,p,q)==NULL)
+        if(root->val<p->val && root->val<q->val)
             return lowestCommonAncestor(root->right,p,q);
         
         return root;
