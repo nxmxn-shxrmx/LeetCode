@@ -18,6 +18,9 @@ public:
                     sum=g;
                     y = abs(g-t);
                 }
+                if(t==g)
+                    return g;
+                    
                 if(g>t)
                 --k;
                 else
