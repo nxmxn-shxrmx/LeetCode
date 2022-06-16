@@ -35,7 +35,7 @@ public:
                 q1.push({i,j+1});
                 
             }
-            swap(q,q1);
+            swap(q1,q);
         }
         return st>1?st-1:-1;
        
