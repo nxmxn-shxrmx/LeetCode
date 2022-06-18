@@ -34,12 +34,12 @@ public:
             }
         }
         
-        for(auto c:g)
-        {
-            for(auto x:c)
-                cout<<x<<" ";
-            cout<<"\n";
-        }
+        // for(auto c:g)
+        // {
+        //     for(auto x:c)
+        //         cout<<x<<" ";
+        //     cout<<"\n";
+        // }
         int st = 0;
         while(!q.empty())
         {
