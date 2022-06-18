@@ -43,8 +43,8 @@ public:
         int st = 0;
         while(!q.empty())
         {
-            
-            while(!q.empty())
+            int s= q.size();
+            while(s--)
             {
                 int i = q.front().first;
                 int j = q.front().second;
@@ -63,13 +63,12 @@ public:
 
                     
                     g[ni][nj]=2;
-                    q1.push({ni ,nj});  
+                    q.push({ni ,nj});  
         
                 }
             }
             
             st++;
-            swap(q1,q);
         }
             
         return st;
