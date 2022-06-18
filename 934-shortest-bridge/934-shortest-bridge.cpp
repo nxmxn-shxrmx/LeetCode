@@ -56,7 +56,7 @@ public:
             {
                 g[i][j]=1;
                 for(auto c:d)
-                            q.push({{c[0]+i,j+c[1]},k+1});   
+                            q.push({{c[0]+i ,j+c[1]},k+1});   
             }
         }
             
