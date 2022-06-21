@@ -12,11 +12,11 @@ public:
             b[c[0]].push_back(c[1]);
     
         
-        vector<int>h(n,INT_MAX);
+        vector<int>h(n,-1);
         h[0]= 0;
         for(auto c:r[0])
         {
-            if(h[c]>h[0]+1)
+            if(h[c]==-1 ||h[c]>h[0]+1)
                 h[c]=h[0]+1;
                
             if(!m[{c,0}])
@@ -24,7 +24,7 @@ public:
         }
         for(auto c:b[0])
         {
-             if(h[c]>h[0]+1)
+             if(h[c]==-1 ||h[c]>h[0]+1)
                 h[c]=h[0]+1;
              
         
@@ -49,7 +49,7 @@ public:
                 
                     for(auto c:b[i])
                     {
-                        if(h[c]>st)
+                        if(h[c]==-1 || h[c]>st)
                             h[c]=st;
             
                         if(m[{c,1}]==false)
@@ -63,7 +63,7 @@ public:
                     for(auto c:r[i])
                     {
                    // cout<<t<<" "<<0<<" "<<c<<" "<<i<<"\n";
-                        if(h[c]>st)
+                        if(h[c]==-1 ||h[c]>st)
                             h[c]=st;
             
                         if(m[{c,0}]==false)
@@ -77,9 +77,7 @@ public:
             st++;
         
         }
-        for(int i = 0;i<n;++i)
-            if(h[i]==INT_MAX)
-                h[i]=-1;
+
      return h;   
     }
 };
