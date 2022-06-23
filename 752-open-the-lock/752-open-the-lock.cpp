@@ -8,7 +8,7 @@ public:
         queue<string>q;
         
         if(!m["0000"])
-        q.push("0000");
+        q.push("0000"),m["0000"]=true;
         
         int st = 0;
         while(!q.empty())
