@@ -18,6 +18,11 @@ public:
         
         for(auto c:qu)
         {
+            if(m[{c[0],c[1]}]!=0)
+            {
+                ans.push_back(m[{c[0],c[1]}]);
+                continue;
+            }
             queue<pair<string,double>>q;
             q.push({c[0],1.00});
             map<string,bool>b;
@@ -31,10 +36,11 @@ public:
                     ans.push_back(m[{y,c[1]}]*p);
                     break;
                 }
+                
                 for(auto k:v[y])
                 {
                     if(!b[k])
-                        q.push({k,m[{y,k}]*p});
+                        m[{c[0],k}]=m[{y,k}]*p,q.push({k,m[{y,k}]*p});
                 }
                 
                  q.pop();
