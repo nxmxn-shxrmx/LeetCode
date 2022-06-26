@@ -2,28 +2,26 @@ class Solution {
 public:
     int slidingPuzzle(vector<vector<int>>& b) {
 
-        map<vector<vector<int>>,bool>m;
-        queue<pair<pair<int,int>,vector<vector<int>>>>q;
-        vector<int>a;
-        int in = 0;
-        int jn = 0;
+        map<string,bool>m;
+        queue<pair<string,int>>q;
+        string s ="";
+        int p =0;
+        int o = 0;
         for(int i =0;i<b.size();++i)
         {
             for(int j = 0;j<b[0].size();++j)
             {    
+                s+=to_string(b[i][j]);
                 if(b[i][j]==0)
                 {
-                    in = i;
-                    jn = j;
-                    break;
+                    o=p;
                 }
+                p++;
             }
-            if(b[in][jn]==0)
-                break;
         }
-        q.push({{in,jn},b});
+        q.push({s,o});
         int st = 0;
-        int d[4][2]={{-1,0},{0,-1},{0,1},{1,0}};
+        vector<vector<int>>v={{1,3},{0,2,4},{1,5},{0,4},{1,3,5},{4,2}};
         while(!q.empty())
         {
     
@@ -31,39 +29,21 @@ public:
             while(s--)
             {
                 
-                int i = q.front().first.first;
-                int j = q.front().first.second;
-                vector<vector<int>>h(q.front().second.begin(),q.front().second.end());
+                string e = q.front().first;
+                int i = q.front().second;
+    
                 q.pop();
-                int p = 1;
-                int  t =0;
-               
-                for(int i =0;i<b.size();++i)
-                {
-                    for(int j = 0;j<3;++j)
-                    {
-                        if(p!=6 && p!=h[i][j])
-                            t=1;
-                        p++;
-                    }
-                }
-                if(!t)
+                if(e=="123450")
                     return st;
                 
-                
-                if(m[h]==true)
+                if(m[e]==true)
                     continue;
-                m[h]=true;
-                for(auto c:d)
+                m[e]=true;
+                for(auto c:v[i])
                 {
-                    int in= c[0]+i;
-                    int jn =c[1]+j;
-                    if(in<0 || jn<0 || in>=2 || jn>=3)
-                        continue;
-                    
-                    swap(h[i][j],h[in][jn]);
-                    q.push({{in,jn},h});
-                    swap(h[i][j],h[in][jn]);
+                    swap(e[c],e[i]);
+                    q.push({e,c});
+                    swap(e[c],e[i]);
                 }
                 
             }
