@@ -8,38 +8,28 @@ class Solution
 	public:
 	//Function to find the shortest distance of all the vertices
     //from the source vertex S.
-    int mini(vector<int>&k ,vector<bool>&vis)
-    {
-        int id = INT_MAX,in=-1;
-        for(int i = 0;i<k.size();++i)
-        {
-            if(k[i]<=id && !vis[i])
-            {
-                id = k[i];
-                in = i;
-            }
-        }
-        return in;
-    }
+  
     vector <int> dijkstra(int n, vector<vector<int>> adj[], int S)
     {
-        // Code here
+        queue<int>q;
         vector<int>k(n,INT_MAX);
         k[S]=0;
-        vector<bool>vis(n,false);
-        
-        for(int i = 0;i<n-1;++i)
+        q.push(S);
+        while(!q.empty())
         {
-            int u = mini(k,vis);
-         
-            vis[u]=true;
-            for(int j = 0;j<adj[u].size();++j)
-            {
-                if(u!=INT_MAX && !vis[adj[u][j][0]] && k[u]!=INT_MAX && k[u]+adj[u][j][1]<k[adj[u][j][0]])
-                k[adj[u][j][0]]=k[u]+adj[u][j][1];
-            }
+            int i = q.front();
+            q.pop();
             
+            for(auto c:adj[i])
+            {
+                if(k[i]+c[1]<k[c[0]])
+                {
+                    q.push(c[0]);
+                    k[c[0]] = k[i]+c[1];
+                }
+            }
         }
+    
         return k;
     }
 };
