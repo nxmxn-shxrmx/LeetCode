@@ -56,7 +56,7 @@ class Solution
 	       int i = q.front();
 	       q.pop();
 	       v.push_back(i);
-	       m[i]=-1;
+	   
 	       
 	       for(auto c:adj[i])
 	       {
