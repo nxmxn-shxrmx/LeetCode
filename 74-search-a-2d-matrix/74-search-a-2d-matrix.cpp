@@ -1,27 +1,20 @@
 class Solution {
 public:
-    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+    bool searchMatrix(vector<vector<int>>& m, int t) {
         
-
-        
-        int rr = matrix.size();
-        int i =0;
-        int rc  = matrix[0].size()-1;
-        
-        while(i<rr && rc>=0)
-        {
-            
-            cout<<matrix[i][rc]<<" ";
-            if(matrix[i][rc]==target)
-                return true;
-            else if(matrix[i][rc]>target)
-                rc--;
-            else
-                i++;
-    
-            
-        }
-        
+    int i=0;
+    int j=m[0].size()-1;
+    while(j>=0 && i<m.size())
+    {
+        if(t==m[i][j])
+            return true;
+        if(t>m[i][j])
+            ++i;
+    else
+        --j;
+    }
+     
         return false;
+    
     }
 };
