@@ -1,31 +1,27 @@
 class Solution {
 public:
-    int u=0,maz=0;
-    void pallin(string s,int i,int j)
+    int mz = 0;
+    int u = 0;
+    void chek(string s,int i,int j)
     {
         while(i>=0 && j<s.size() && s[i]==s[j])
-            --i,++j;
-        
-      //  cout<<i+1<<" "<<j-(i+1)<<"\n";
-        if(maz<(j-(i+1)))
+            --i,j++;
+        j--;
+        ++i;
+        if(mz<(j-i+1))
         {
-            u = i+1;
-            maz =  j-(i+1);
+            mz=(j-i+1);
+            u = i;
         }
-        
     }
     string longestPalindrome(string s) {
         
-        int n = s.size();
-        if(n<2)
-            return s;
-        
-        for(int i = 0;i<n-1;++i)
+        for(int i = 0;i<s.size();++i)
         {
-            pallin(s,i,i);//odd
-            pallin(s,i,i+1);//even;
+            chek(s,i,i);
+            chek(s,i,i+1);
         }
-        return s.substr(u,maz);
+        return s.substr(u,mz);
+        
     }
-    
 };
