@@ -2,18 +2,15 @@ class Solution {
 public:
     double average(vector<int>& s) {
     
-        int ma=INT_MIN,mi=INT_MAX;
-        double h = 0;
-        for(auto c:s)
-        {
-            ma = max(c,ma);
-            mi=min(c,mi);
-            h+=c;
-        }
-        h-=ma;
-        h-=mi;
+        int ma=*max_element(s.begin(),s.end());
+        int mi=*min_element(s.begin(),s.end());
+        int h =0;
+       double j= accumulate(s.begin(),s.end(),h);
+    
+        j-=ma;
+        j-=mi;
         
-        return h/(s.size()-2)*1.0;
+        return j/(s.size()-2);
         
     }
     
