@@ -1,6 +1,7 @@
 class Solution {
 public:
     vector<string>v;
+
     void reus(int i,int l,int r,string s,int n)
     {
         if(i==2*n)
