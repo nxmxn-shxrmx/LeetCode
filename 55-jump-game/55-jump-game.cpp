@@ -8,7 +8,7 @@ public:
         
         int end=0;
         int fur=0;
-        for(int i=0;i<nums.size();++i)
+        for(int i=0;i<nums.size()-1;++i)
         {
             fur = max(nums[i]+i,fur);
             if(end==i)
