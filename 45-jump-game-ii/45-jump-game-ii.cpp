@@ -15,7 +15,7 @@ public:
             
             else
             {
-                for(int j =1;j<=k && (j+i)<nums.size();++j)
+                for(int j =1;j<=k;++j)
                 {
                     if(g[i+j]==-1 || g[i+j]==INT_MAX)
                         continue;
