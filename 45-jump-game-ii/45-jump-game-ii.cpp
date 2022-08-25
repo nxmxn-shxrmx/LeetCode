@@ -1,31 +1,19 @@
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        vector<long long>g(nums.size(),INT_MAX);
-        g[nums.size()-1]=0;
-        
-        for(int i= nums.size()-2;~i;--i)        
+        int j=0;
+        int end=0;
+        int fur=0;
+        for(int i=0;i<nums.size()-1;++i)
         {
-            long long k = nums[i];
-            int j = 0;
-            if(i+nums[i]>=nums.size()-1)
-                g[i]=1;
-            else if(nums[i]==0)
-                g[i]=-1;
-            
-            else
+            fur = max(fur,nums[i]+i);
+            if(i==end)
             {
-                for(int j =1;j<=k;++j)
-                {
-                    if(g[i+j]==-1 || g[i+j]==INT_MAX)
-                        continue;
-                    
-                    g[i] = min(g[i+j]+1,g[i]);
-                    
-                }
+                j++;
+                end =fur;
             }
-            
+        
         }
-        return g[0];
+        return j;
     }
 };
