@@ -9,7 +9,9 @@ public:
         if(k==0)
         {
             // cout<<lo<<"\n";
+            if(lo==(1<<n.size())-1)
             return 1;
+            return 0;
         }
         if(t==s)
             return dp[lo]=sub(0,k-1,0,s,n,lo);
