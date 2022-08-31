@@ -11,9 +11,8 @@ public:
         
          // cout<<4*sum<<" "<<i<<"\n";
          if(neededApples<=4*sum)
-         {
              return 4*(i);
-         }
+        
              i+=2;
      }
         return 0;
