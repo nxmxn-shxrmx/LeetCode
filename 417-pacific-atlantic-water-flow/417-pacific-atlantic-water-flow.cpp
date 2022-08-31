@@ -1,112 +1,68 @@
 class Solution {
 public:
-    vector<vector<int>> pacificAtlantic(vector<vector<int>>& h) {
-        map<pair<int,int>,bool>m,n;
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        
         queue<pair<int,int>>q;
-        for(int i = 0;i<h.size();++i)
-            m[{i,0}]=true,q.push({i,0});
-        for(int i=0;i<h[0].size();++i)
-            m[{0,i}]=true,q.push({0,i});
+        set<vector<int>>ans;
+        map<pair<int,int>,bool>atlantic,pacific;
+        
+        for(int count=0;count<heights[0].size();++count)
+            atlantic[{0,count}]=true,q.push({0,count});
+        
+            for(int count =0;count<heights.size();++count)
+                    atlantic[{count,0}]=true,q.push({count,0});
+        
+        
+        int dir[4][2]={{0,1},{1,0},{-1,0},{0,-1}};
         
         while(!q.empty())
         {
-            int i =q.front().first;
-            int j = q.front().second;
+            int x = q.front().first;
+            int y =  q.front().second;
             
-            if(i+1<h.size() && h[i+1][j]>=h[i][j])
+            for(int count =0;count<4;++count)
             {
-                if(m[{i+1,j}]==false)
-                {
-                    m[{i+1,j}]=true;
-                    q.push({i+1,j});
-                }
-            }
-            if(i-1>=0 && h[i-1][j]>=h[i][j])
-            {
-                if(m[{i-1,j}]==false)
-                {
-                    m[{i-1,j}]=true;
-                    q.push({i-1,j});
-                }
+                int i = x+dir[count][0];
+                int j = y+dir[count][1];
                 
-            }
-             if(j-1>=0 && h[i][j-1]>=h[i][j])
-            {
-                if(m[{i,j-1}]==false)
+                if(i>=0 && j>=0 && i<heights.size() && j<heights[0].size() && !atlantic[{i,j}] && heights[i][j]>=heights[x][y])
                 {
-                    m[{i,j-1}]=true;
-                    q.push({i,j-1});
+                    atlantic[{i,j}]=1;
+                    q.push({i,j});
                 }
-                
-            }
-             if(j+1<h[0].size() && h[i][j+1]>=h[i][j])
-            {
-                if(m[{i,j+1}]==false)
-                {
-                    m[{i,j+1}]=true;
-                    q.push({i,j+1});
-                }
-                
             }
             q.pop();
         }
         
+         for(int count=0;count<heights[0].size();++count)
+            pacific[{heights.size()-1,count}]=true,q.push({heights.size()-1,count});
         
-         for(int i = 0;i<h.size();++i)
-            n[{i,h[0].size()-1}]=true,q.push({i,h[0].size()-1});
-        for(int i=0;i<h[0].size();++i)
-            n[{h.size()-1,i}]=true,q.push({h.size()-1,i});
+         for(int count=0;count<heights.size();++count)
+         pacific[{count,heights[0].size()-1}]=true,q.push({count,heights[0].size()-1});
         
-        while(!q.empty())
+       
+          while(!q.empty())
         {
-            int i =q.front().first;
-            int j = q.front().second;
-            
-            if(i+1<h.size() && h[i+1][j]>=h[i][j])
+            int x = q.front().first;
+            int y =  q.front().second;
+            if(atlantic[{x,y}])
+                ans.insert({x,y});
+            for(int count =0;count<4;++count)
             {
-                if(n[{i+1,j}]==false)
-                {
-                    n[{i+1,j}]=true;
-                    q.push({i+1,j});
-                }
-            }
-            if(i-1>=0 && h[i-1][j]>=h[i][j])
-            {
-                if(n[{i-1,j}]==false)
-                {
-                    n[{i-1,j}]=true;
-                    q.push({i-1,j});
-                }
+                int i = x+dir[count][0];
+                int j = y+dir[count][1];
                 
-            }
-             if(j-1>=0 && h[i][j-1]>=h[i][j])
-            {
-                if(n[{i,j-1}]==false)
+                if(i>=0 && j>=0 && i<heights.size() && j<heights[0].size() && !pacific[{i,j}] && heights[i][j]>=heights[x][y])
                 {
-                    n[{i,j-1}]=true;
-                    q.push({i,j-1});
+                    
+                        
+                    pacific[{i,j}]=1;
+                    q.push({i,j});
                 }
-                
-            }
-             if(j+1<h[0].size() && h[i][j+1]>=h[i][j])
-            {
-                if(n[{i,j+1}]==false)
-                {
-                    n[{i,j+1}]=true;
-                    q.push({i,j+1});
-                }
-                
             }
             q.pop();
         }
-         
-        vector<vector<int>>v;
-    for(auto c:m)
-    {
-        if(n[c.first])
-            v.push_back({c.first.first,c.first.second});
-    }
-      return v;
         
+        return {ans.begin(),ans.end()};
     }
 };
