@@ -24,9 +24,17 @@ public:
             ++j;
         }
         swap(nums[j-1],nums[i-1]);
-
-        // cout<<"\n";
-        reverse(nums.begin()+i,nums.end());
+         // cout<<i<<"\n";
+         j=nums.size()-1;
+        
+        while(i<j)
+        {
+            swap(nums[i],nums[j]);
+            // cout<<nums[i]<<" "<<nums[nums.size()-1-j]<<"\n";
+            ++i;
+            --j;
+        }
+    
         
     }
 };
