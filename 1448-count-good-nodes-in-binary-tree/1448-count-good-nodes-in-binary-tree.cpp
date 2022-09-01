@@ -19,10 +19,7 @@ public:
         {
             maz = root->val;
             count+=1;
-        }
-            count+=goodNodes(root->right,maz);
-            count+=goodNodes(root->left,maz);   
-        
-        return count;
+        }   
+        return count+=goodNodes(root->right,maz)+goodNodes(root->left,maz);
     }
 };
