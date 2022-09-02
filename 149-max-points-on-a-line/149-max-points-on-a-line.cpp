@@ -27,7 +27,7 @@ public:
             for(int j =0;j<slopes.size();++j)
                 if(i!=j)
                 m[slopes[i][j]]++,u=max(u,m[slopes[i][j]]);
-            p =max(u,p);
+             p =max(u,p);
         }
         
      return p+1;   
