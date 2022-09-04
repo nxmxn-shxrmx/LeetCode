@@ -11,29 +11,29 @@
  */
 class Solution {
 public:
-    
-    map<int,vector<pair<pair<int,int>,int>>>m;
-    void in(TreeNode* root,int r,int c)
+    map<int,vector<pair<int,int>>>m;
+    void reurse(int col ,int row,TreeNode* root)
     {
         if(root==NULL)
             return;
-        m[r].push_back({{c,r},root->val});
-        in(root->left,r-1,c+1);
-        in(root->right,r+1,c+1);
+        
+        m[col].push_back({row,root->val});
+        reurse(col-1,row+1,root->left);
+        reurse(col+1,row+1,root->right);
+        
     }
     vector<vector<int>> verticalTraversal(TreeNode* root) {
         vector<vector<int>>v;
-        in(root,0,0);
+        reurse(0,0,root);
         for(auto c:m)
         {
-            vector<int>f;
+            vector<int>p;
             sort(c.second.begin(),c.second.end());
             for(auto x:c.second)
             {
-                f.push_back(x.second);
+                p.push_back(x.second);
             }
-            v.push_back(f);
-            
+            v.push_back(p);
         }
         return v;
     }
