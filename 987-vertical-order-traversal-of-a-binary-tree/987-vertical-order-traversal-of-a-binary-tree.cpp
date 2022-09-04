@@ -11,13 +11,13 @@
  */
 class Solution {
 public:
-    map<int,vector<pair<int,int>>>m;
+    map<int,multiset<pair<int,int>>>m;
     void reurse(int col ,int row,TreeNode* root)
     {
         if(root==NULL)
             return;
         
-        m[col].push_back({row,root->val});
+        m[col].insert({row,root->val});
         reurse(col-1,row+1,root->left);
         reurse(col+1,row+1,root->right);
         
@@ -28,7 +28,6 @@ public:
         for(auto c:m)
         {
             vector<int>p;
-            sort(c.second.begin(),c.second.end());
             for(auto x:c.second)
             {
                 p.push_back(x.second);
