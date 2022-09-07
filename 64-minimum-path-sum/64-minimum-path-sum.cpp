@@ -1,30 +1,23 @@
 class Solution {
 public:
-    long long dp[201][201];
-    long long recur(vector<vector<int>>v,int i,int j)
-    {
-        if(i==v.size()-1 && j==v[0].size()-1)
-        return v[i][j];
-         if(dp[i][j]!=-1)
-             return dp[i][j];
-        long long u=INT_MAX;
-        dp[i][j]=0;
-        if(i+1<v.size())
-       u=min(u, recur(v,i+1,j));
-        if(j+1<v[0].size())
-     u = min (u,  recur(v,i,j+1));
-        
-        dp[i][j]=u;
-       
-        return dp[i][j]+=v[i][j];
-        
-    }
+
     int minPathSum(vector<vector<int>>& g) {
-        memset(dp,-1,sizeof(dp));
-      
-        if(g.size()==200 && g[0].size()==200)
-            return 823;
-   return recur(g,0,0);
         
+        int dp[g.size()][g[0].size()];
+        memset(dp,0,sizeof(dp));
+        dp[0][0]=g[0][0];
+        for(int i =1;i<g.size();++i)
+            dp[i][0]+=dp[i-1][0]+g[i][0];
+        
+        for(int j =1;j<g[0].size();++j)
+            dp[0][j]+=dp[0][j-1]+g[0][j];
+        
+        for(int i=1;i<g.size();++i)
+        {
+            for(int j =1;j<g[0].size();++j)
+                    dp[i][j]=min(dp[i][j-1],dp[i-1][j])+g[i][j];   
+       }
+ 
+        return dp[g.size()-1][g[0].size()-1];   
     }
 };
