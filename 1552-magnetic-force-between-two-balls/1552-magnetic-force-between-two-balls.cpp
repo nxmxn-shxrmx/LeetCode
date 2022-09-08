@@ -7,6 +7,8 @@ public:
        int u =0;
        for(int i=1;i<v.size();i++){
            if((v[i]-v[u])>=m) balls++,u=i;
+              if(balls>=k)
+        return true;
        }
        if(balls>=k)
         return true;
