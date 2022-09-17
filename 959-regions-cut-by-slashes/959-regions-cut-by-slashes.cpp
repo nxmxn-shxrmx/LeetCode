@@ -54,7 +54,7 @@ public:
                     
                     int u =par(x);
                     int v =par(y);
-                    if(m[u]==m[v])
+                    if(u==v)
                         k++;
                     
                         make(u,v);
@@ -71,7 +71,7 @@ public:
                     
                     int u =par(x);
                     int v =par(y);
-                    if(m[u]==m[v])
+                    if(u==v)
                         k++;
                     
                         make(u,v);
