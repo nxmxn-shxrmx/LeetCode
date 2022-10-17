@@ -6,6 +6,8 @@ public:
         for(auto c:s)
         {
             k|=(1<<(c-'a'));
+            if(u==k)
+              return 1;
         }
         return k==u;
     }
