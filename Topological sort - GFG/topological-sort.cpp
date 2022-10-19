@@ -1,78 +1,47 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
 
- // } Driver Code Ends
+// } Driver Code Ends
 class Solution
 {
 	public:
-// 	vector<bool>b;
-// 	stack<int>s;
-// 	void dfs(int i,vector<int>adj[])
-// 	{
-// 	    b[i]=true;
-// 	    for(auto c:adj[i])
-// 	    {
-// 	        if(!b[c])
-// 	        dfs(c,adj);
-// 	    }
-// 	    s.push(i);
-// 	}
+	//Function to return list containing vertices in Topological order. 
+vector<bool>b;
+	stack<int>s;
+	void dfs(int i,vector<int>adj[])
+	{
+	    b[i]=true;
+	    for(auto c:adj[i])
+	    {
+	        if(!b[c])
+	        dfs(c,adj);
+	    }
+	    s.push(i);
+	}
 	//Function to return list containing vertices in Topological order. 
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
-	   // b.clear();
-	   // b = vector<bool>(V);
-	   // for(int i = 0;i<V;++i)
-	   // {
-	   //     if(!b[i])
-	   //     {
-	   //         dfs(i,adj);
-	   //     }
-	   // }
-	   // vector<int>g;
-	   // while(!s.empty())
-	   // {
-	   //     g.push_back(s.top());
-	   //     s.pop();
-	   // }
-	   // return g;
-	    vector<int>v;
-	    
-	    vector<int>m(V);
-	    
-	    for(int i =0;i<V;++i)
-	        for(auto x:adj[i])
-	            m[x]++;
-	            
-	   queue<int>q;
-	   for(int i = 0;i<V;++i)
-	   {
-	       if(m[i]==0)
-	       q.push(i);
-	   }
-	   while(!q.empty())
-	   {
-	       int i = q.front();
-	       q.pop();
-	       v.push_back(i);
-	   
-	       
-	       for(auto c:adj[i])
-	       {
-	           m[c]--;
-	           if(m[c]==0)
-	           {
-	               q.push(c);
-	           }
-	       }
-	   }
-	   return v;
-	   
+	    b.clear();
+	    b = vector<bool>(V);
+	    for(int i = 0;i<V;++i)
+	    {
+	        if(!b[i])
+	        {
+	            dfs(i,adj);
+	        }
+	    }
+	    vector<int>g;
+	    while(!s.empty())
+	    {
+	        g.push_back(s.top());
+	        s.pop();
+	    }
+	    return g;
 	}
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 
 /*  Function to check if elements returned by user
 *   contains the elements in topological sorted form
@@ -119,4 +88,5 @@ int main() {
     }
     
     return 0;
-}  // } Driver Code Ends
+}
+// } Driver Code Ends
