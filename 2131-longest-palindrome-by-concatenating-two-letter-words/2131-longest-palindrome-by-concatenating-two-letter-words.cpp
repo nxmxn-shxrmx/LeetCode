@@ -2,8 +2,8 @@ class Solution {
 public:
     int longestPalindrome(vector<string>& w) {
         int u = 0;
-        map<string,int>m;
-        map<string,int>g;
+        unordered_map<string,int>m;
+        unordered_map<string,int>g;
      for(auto c:w)
      {
          string s ="";
