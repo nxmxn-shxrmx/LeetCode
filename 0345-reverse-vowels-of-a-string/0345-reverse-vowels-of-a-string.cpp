@@ -1,7 +1,7 @@
 class Solution {
 public:
     string reverseVowels(string s) {
-        map<char,bool>m;
+        unordered_map<char,bool>m;
         m['a']=1;
         m['e']=1;
         m['i']=1;
