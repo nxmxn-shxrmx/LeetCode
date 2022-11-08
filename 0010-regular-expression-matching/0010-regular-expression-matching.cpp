@@ -38,8 +38,33 @@ public:
             return 0;
     }
     bool isMatch(string s, string p) {
-   
-        memset(dp,-1,sizeof(dp));
-        return f(s,p,0,0);
+        
+        dp[s.size()][p.size()]=1;
+        for(int i = p.size()-1;~i;--i)
+        {
+            if(p[i]=='*' && dp[s.size()][i+1])
+                dp[s.size()][i]=1,dp[s.size()][i-1]=1;
+        }
+        for(int i = s.size()-1;~i;--i)
+        {
+            for(int j = p.size()-1;~j;--j)
+            {
+                if(j+1<p.size() && p[j+1]=='*')
+                     dp[i][j]=dp[i][j+1];
+                else if(p[j]=='*')
+                {
+                    if(p[j-1]==s[i] || p[j-1]=='.')
+                        dp[i][j]=dp[i+1][j]||dp[i][j+1];
+            
+                    else
+                        dp[i][j]=dp[i][j+1];
+                }
+                 else if(p[j]=='.' || p[j]==s[i])
+                         dp[i][j]= dp[i+1][j+1];
+                else
+                    dp[i][j]=0;
+            }
+        }
+        return dp[0][0];
     }
 };
