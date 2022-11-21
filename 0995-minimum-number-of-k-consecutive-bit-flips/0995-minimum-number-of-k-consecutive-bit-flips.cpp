@@ -2,16 +2,16 @@ class Solution {
 public:
     int minKBitFlips(vector<int>& nums, int k) {
         int b = 0;
-        set<int>p;
+        vector<int>v(nums.size()+k+1);
         int c = 0;
         for(int i = 0;i<nums.size();++i)
         {
-            if(p.find(i)!=p.end())
+            if(v[i]==1)
                 b = !b;
             if(b==nums[i])
             {
                 b = !b;
-                p.insert(k+i);
+                v[i+k]=1;
                 c++;
             
                 if(k+i>nums.size())
