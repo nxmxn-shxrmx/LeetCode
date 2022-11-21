@@ -1,35 +1,38 @@
 class Solution {
 public:
     int nearestExit(vector<vector<char>>& g, vector<int>& e) {
-       
         queue<pair<int,int>>q;
-        q.push({e[0],e[1]});
-        int st =1;
-        g[e[0]][e[1]]='+';
-        int d[4][2] = {{0,1},{-1,0},{1,0},{0,-1}};
-        
+          map<pair<int,int>,bool>b;
+        b[{e[0],e[1]}]=1;
+        int d[4][2]={{1,0},{-1,0},{0,1},{0,-1}};
+        for(auto c:d)
+        {
+            int x = c[0]+e[0];
+            int y = c[1]+e[1];
+            if(x>=0 && y>=0 && x<g.size() && y<g[0].size() && g[x][y]=='.')
+                q.push({x,y}),b[{x,y}]=1;
+        }
+        int s=1;
         while(!q.empty())
         {
-            int s = q.size();
-            while(s--)
+            int z = q.size();
+            while(z--)
             {
-                int i = q.front().first;
-                int j = q.front().second;
-
+                int u = q.front().first;
+                int v = q.front().second;
+                if(u==0 || v==0 || v==g[0].size()-1 || u==g.size()-1)
+                    return s;
                 q.pop();
                 for(auto c:d)
                 {
-                    int ni =i+c[0];
-                    int nj = j+c[1];
-                    if(ni<0 || nj<0 || ni>=g.size() ||nj>=g[0].size() || g[ni][nj]=='+')
-                        continue;
-                    if(ni==g.size()-1 || nj==g[0].size()-1 || nj==0 || ni==0)
-                        return st;
-                    g[ni][nj]='+';
-                    q.push({ni,nj});
+                     int x = c[0]+u;
+            int y = c[1]+v;
+            if(x>=0 && y>=0 && x<g.size() && y<g[0].size() && g[x][y]=='.' && !b[{x,y}])
+                q.push({x,y}),b[{x,y}]=1;
                 }
+                
             }
-            st++;
+            s++;
         }
         return -1;
     }
