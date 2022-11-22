@@ -16,17 +16,17 @@ public:
             
     }
     int longestPalindromeSubseq(string s) {
-        for(int i = 0;i<s.size();++i)
-            dp[i][i]=1;
+      
         int n = s.size();
         for(int i = s.size()-1;~i;--i)
         {
             for(int j = 1;j<=s.size();++j)
             {
-                if(i>=j)
+                if(i>j)
                     continue;
-                
-                if(s[n-i-1]==s[n-j]) dp[i][j]=dp[i+1][j-1]+2;
+                if(i==j)
+                    dp[i][j]=1;
+               else if(s[n-i-1]==s[n-j]) dp[i][j]=dp[i+1][j-1]+2;
                 
                 else dp[i][j] = max(dp[i+1][j],dp[i][j-1]);   
             }
