@@ -18,10 +18,7 @@ public:
                 g = max(g,h*h);
             }
     
-        }
-    
-
-        
+        }    
         return g;
     }
 };
