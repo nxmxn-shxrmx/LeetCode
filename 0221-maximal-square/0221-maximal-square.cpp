@@ -20,12 +20,7 @@ public:
     
         }
     
-        for(auto c:matrix)
-        {
-            for(auto x:c)
-                cout<<x<<" ";
-            cout<<"\n";
-        }
+
         
         return g;
     }
