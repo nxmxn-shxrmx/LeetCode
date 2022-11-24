@@ -8,12 +8,14 @@ public:
             v.push_back(b);
             return;
         }
-        if(n==0 || k==0 || i==10)
+        if(n<=0 || k==0 || i==10)
             return;
-        b.push_back(i);
-        f(i+1,k-1,n-i,b);
-        b.pop_back();
-        f(i+1,k,n,b);
+        for(int p = i;p<=9;++p)
+        {
+            b.push_back(p);
+            f(p+1,k-1,n-p,b);
+            b.pop_back();
+        }
             
     }
     vector<vector<int>> combinationSum3(int k, int n) {
