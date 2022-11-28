@@ -3,7 +3,7 @@ public:
    #define ll long long
     int numberOfArithmeticSlices(vector<int>& nums) {
        ll c=  0;
-       vector<map<ll,ll>>v(nums.size());
+       vector<unordered_map<ll,ll>>v(nums.size());
        for(int i = 1;i<nums.size();++i)
        {
            for(int j =0;j<i;++j)
