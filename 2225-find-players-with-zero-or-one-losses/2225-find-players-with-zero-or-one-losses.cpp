@@ -8,16 +8,17 @@ public:
                 m[c[0]]=0;
             m[c[1]]++;
         }
-        vector<vector<int>>v(2);
+        vector<set<int>>v(2);
         for(auto c:m)
         {
             if(c.second==0)
-                v[0].push_back(c.first);
+                v[0].insert(c.first);
             if(c.second==1)
-                v[1].push_back(c.first);
+                v[1].insert(c.first);
         }
-        sort(v[0].begin(),v[0].end());
-         sort(v[1].begin(),v[1].end());
-        return v;
+        vector<int>a(v[0].begin(),v[0].end());
+        vector<int>b(v[1].begin(),v[1].end());
+        
+        return {a,b};
     }
 };
