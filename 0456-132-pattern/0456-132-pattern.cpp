@@ -5,9 +5,9 @@ public:
             return 0;
         
         vector<int>m(nums.size());
-        m[0]=nums[0];
+        m[0]=INT_MAX;
         for(int i =1;i<nums.size();++i)
-            m[i] = min(m[i-1],nums[i]);
+            m[i] = min(m[i-1],nums[i-1]);
         stack<int>s;
         for(int i= nums.size()-1;i>=1;--i)
         {
