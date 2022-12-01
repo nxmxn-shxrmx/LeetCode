@@ -1,11 +1,12 @@
 class Solution {
 public:
-    set<string>s;
+    string ans="99999999999999";
     void f(int i,string t,string p,vector<int>v)
     {
         if(i==p.size())
         {
-            s.insert(t);
+            if(ans>t)
+                ans = t;
             return;
         }
         
@@ -42,6 +43,6 @@ public:
             f(0,""+to_string(i),pattern,v);
             v[i]=0;
         }
-        return *s.begin();
+        return ans;
     }
 };
