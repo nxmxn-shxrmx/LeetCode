@@ -9,6 +9,8 @@ public:
                 ans = t;
             return;
         }
+        if(t>ans)
+            return;
         
         if(p[i]=='I')
         {
