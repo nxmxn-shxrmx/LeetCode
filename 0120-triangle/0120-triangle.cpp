@@ -11,12 +11,7 @@ public:
             t[i][t[i-1].size()]+=t[i-1][t[i-1].size()-1];
         }
         int ans = INT_MAX;
-        for(auto c:t)
-        {
-            for(auto x:c)
-                cout<<x<<" ";
-            cout<<"\n";
-        }
+     
         for(auto c:t[t.size()-1])
             ans = min(ans,c);
         return ans;
