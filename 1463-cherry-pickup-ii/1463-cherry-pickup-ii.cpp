@@ -20,7 +20,7 @@ public:
             p = max(p,f(i+1,x,y,g));
         }
             p+= g[i][k]+g[i][j];
-        return  dp[i][j][k]=p;
+        return  dp[i][j][k]=dp[i][k][j]=p;
     }
     int cherryPickup(vector<vector<int>>& g){
         int n = g.size();
