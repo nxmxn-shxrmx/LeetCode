@@ -13,11 +13,13 @@ public:
         if(j==k)
             return dp[i][j][k]=max(max(f(i+1,j-1,k,g),f(i+1,j,k+1,g)),f(i+1,j-1,k+1,g))+g[i][j];
         
-        int d[9][2]={{-1,-1},{0,0},{1,-1},{-1,1},{1,0},{0,1},{-1,0},{0,-1},{1,1}};
         int p =0;
-        for(auto c:d)
-            p = max(p,f(i+1,j+c[0],k+c[1],g));
-        p+= g[i][k]+g[i][j];
+        for(int x = j-1;x<=j+1;++x)
+        {
+            for(int y = k-1;y<=k+1;++y)
+            p = max(p,f(i+1,x,y,g));
+        }
+            p+= g[i][k]+g[i][j];
         return  dp[i][j][k]=p;
     }
     int cherryPickup(vector<vector<int>>& g){
