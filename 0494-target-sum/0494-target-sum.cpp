@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp[21][5001];
+    int dp[21][3001];
     int f(int i,vector<int>v,int sum)
     {
         if(i==v.size())
