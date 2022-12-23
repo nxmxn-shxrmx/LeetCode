@@ -1,7 +1,7 @@
 class Solution {
 public:
-    map<int,int>par;
-    map<int,int>siz;
+    vector<int>par;
+    vector<int>siz;
     int find(int x)
     {
         if(par[x]==x)
@@ -12,14 +12,14 @@ public:
     {
         int n = g[0].size();
         int d[4][2]={{0,1},{0,-1},{1,0},{-1,0}};
-        if(par.find(i*n+j+1)==par.end())
+        if(par[i*n+j+1]==-1)
             par[i*n+j+1]=i*n+j+1,siz[i*n+j+1]=1;
         
         for(auto c:d)
         {
             if(i+c[0]>=0 && i+c[0]<g.size() && j+c[1]>=0 && j+c[1]<g[0].size() && g[i+c[0]][j+c[1]]==1)
             {
-                 if(par.find((i+c[0])*n+(j+c[1])+1)==par.end())
+                 if(par[(i+c[0])*n+(j+c[1])+1]==-1)
                     par[(i+c[0])*n+(j+c[1])+1]=(i+c[0])*n+(j+c[1]+1),siz[(i+c[0])*n+(j+c[1])+1]=1;  
                 int u = find(i*n+j+1);
                 int v = find((i+c[0])*n+(j+c[1])+1);
@@ -43,6 +43,8 @@ public:
             }
     }
     vector<int> hitBricks(vector<vector<int>>& grid, vector<vector<int>>& hits) {
+        par = vector<int>(grid.size()*grid[0].size()+2,-1);
+        siz = vector<int>(grid.size()*grid[0].size()+2);
         par[0]=0;
         siz[0]=0;
         for(auto c:hits)
