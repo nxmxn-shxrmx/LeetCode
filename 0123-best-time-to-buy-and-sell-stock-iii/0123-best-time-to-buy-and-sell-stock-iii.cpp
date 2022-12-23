@@ -14,15 +14,17 @@ public:
 //         return dp[i][b][k]=max(f(i+1,k+1,1,v)+v[i],f(i+1,k,b,v));
 //     }
     int maxProfit(vector<int>& prices) {
-        vector<vector<vector<int>>>dp(prices.size()+1,vector<vector<int>>(2,vector<int>(3,0)));
+        vector<vector<int>>pre(2,vector<int>(3,0));
+        vector<vector<int>>cur(2,vector<int>(3,0));
         for(int i = prices.size()-1;~i;--i)
         {
             for(int k = 1;~k;--k)
             {
-                dp[i][1][k]=max(dp[i+1][0][k]-prices[i],dp[i+1][1][k]);
-                dp[i][0][k]=max(dp[i+1][1][k+1]+prices[i],dp[i+1][0][k]);
+                cur[1][k]=max(pre[0][k]-prices[i],pre[1][k]);
+                cur[0][k]=max(pre[1][k+1]+prices[i],pre[0][k]);
             }
+            pre= cur;
         }
-        return dp[0][1][0];
+        return cur[1][0];
     }
 };
