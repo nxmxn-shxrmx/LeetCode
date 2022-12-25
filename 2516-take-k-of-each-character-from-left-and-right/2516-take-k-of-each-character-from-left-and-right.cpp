@@ -67,13 +67,13 @@ public:
         int l = 0;
         int ans = s.size();
         int r = s.size();
-        while((r-l)>1)
+        while(l<=r)
         {
             int m = (l+r)/2;
             if(check(m,s,k))
-                r = m,ans=m;
+                r = m-1,ans=m;
             else
-                l = m;
+                l = m+1;
         }
         return ans;
     }
