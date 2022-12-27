@@ -30,7 +30,7 @@ public:
     vector<bool> areConnected(int n, int t, vector<vector<int>>& queries) {
         vector<int>m(n+1);
         vector<int>si(n+1);
-        for(int i = 1;i<=n;++i)
+        for(int i = t+1;i<=n;++i)
         {
             int p = 1;
             p =max(t+1,p);
