@@ -34,11 +34,9 @@ public:
         {
             int p = 1;
             p =max(t+1,p);
-            for(int j=p;j<i;++j)
-            {
-                if(i%j==0)
+            for(int j=i+i;j<=n;j=j+i)
                     make(i,j,m,si);
-            }
+        
         }
         vector<bool>b;
         for(auto c:queries)
