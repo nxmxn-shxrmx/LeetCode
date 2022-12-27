@@ -50,7 +50,7 @@ public:
             else
                 b.push_back(0);
         }
-        for(auto c:m)cout<<c<<" ";
+       
         return b;
     }
 };
