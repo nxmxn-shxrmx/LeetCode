@@ -14,7 +14,7 @@ public:
             q.push(r);
         }
         int l=0;
-        while(!q.empty())
+        while(!q.empty() && q.top()!=0)
         {
             l+=q.top();
             q.pop();
