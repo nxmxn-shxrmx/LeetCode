@@ -4,7 +4,7 @@ public:
         int m=0;
         for(int i = 0;i<points.size();++i)
         {
-            map<double,int>mi;
+            unordered_map<double,int>mi;
             for(int j = i+1;j<points.size();++j)
             {
                 double p = points[i][1]-points[j][1];
