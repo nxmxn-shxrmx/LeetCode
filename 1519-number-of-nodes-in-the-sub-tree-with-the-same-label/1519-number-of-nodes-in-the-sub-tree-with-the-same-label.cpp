@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<int>ans;
-    vector<int>f(int i,int pre,vector<vector<int>>&v,string &l)
+    vector<int>f(int &i,int &pre,vector<vector<int>>&v,string &l)
     {
         vector<int>u(26);
         for(auto c:v[i])
@@ -26,7 +26,9 @@ public:
             v[c[0]].push_back(c[1]);
             v[c[1]].push_back(c[0]);
         }
-        f(0,-1,v,labels);
+        int i = 0;
+        int pre =-1;
+        f(i,pre,v,labels);
         return ans;
     }
 };
