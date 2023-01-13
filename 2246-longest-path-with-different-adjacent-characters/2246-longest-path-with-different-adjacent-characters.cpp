@@ -1,23 +1,34 @@
 class Solution {
 public:
-     int longestPath(vector<int>& parent, string s) {
-        int n = s.size(), res = 0;
-        vector<vector<int>> children(n, vector<int>());
-        for (int i = 1; i < n; ++i)
-            children[parent[i]].push_back(i);
-        dfs(children, s, res, 0);
-        return res;
-    }
-
-    int dfs(vector<vector<int>>& children, string& s, int& res, int i) {
-        int big1 = 0, big2 = 0;
-        for (int& j : children[i]) {
-            int cur = dfs(children, s, res, j);
-            if (s[i] == s[j]) continue;
-            if (cur > big2) big2 = cur;
-            if (big2 > big1) swap(big1, big2);
+    int ans =1;
+    int f(int i,vector<vector<int>>&v,string &s)
+    {
+        int k = 1;
+        int p = 0;
+        int q = 0;
+        for(auto c:v[i])
+        {
+            int h = f(c,v,s);
+            if(s[i]!=s[c])
+            {
+                if(h>=p)
+                {
+                    q = p;
+                    p = h;
+                }
+                else if(h>=q)
+                    q = h;
+            }
         }
-        res = max(res, big1 + big2 + 1);
-        return big1 + 1;
+        ans = max(ans,k+p+q);
+        return k+p;
+    }
+    int longestPath(vector<int>& parent, string s) {
+        vector<vector<int>>v(parent.size());
+        for(int  i =1;i<parent.size();++i)
+            v[parent[i]].push_back(i);
+        
+        f(0,v,s);
+        return ans;
     }
 };
