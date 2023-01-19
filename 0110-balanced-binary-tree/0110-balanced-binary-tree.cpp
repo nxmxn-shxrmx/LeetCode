@@ -11,14 +11,16 @@
  */
 class Solution {
 public:
+    unordered_map<TreeNode*,int>m; 
     int h(TreeNode* r)
     {
         if(r==NULL)
             return 0;
-        
+        if(m.find(r)!=m.end())
+            return m[r];
         int h1 =h(r->left);
         int h2 =h(r->right);
-        return max(h1,h2)+1;
+        return m[r]=max(h1,h2)+1;
     }
     bool isBalanced(TreeNode* root) {
         if(root==NULL)
