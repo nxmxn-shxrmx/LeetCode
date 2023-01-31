@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp[1001][1001];
+    int dp[1002][1002];
     int f(int i,vector<vector<int>>&v,int age)
     {
         if(i==v.size())return 0;
@@ -12,10 +12,21 @@ public:
     }
     int bestTeamScore(vector<int>& scores, vector<int>& ages) {
         vector<vector<int>>v;
-        memset(dp,-1,sizeof(dp));
+        int mx =0;
         for(int i = 0;i<scores.size();++i)
-            v.push_back({scores[i],ages[i]});
+            v.push_back({scores[i],ages[i]}),mx = max(v[i][1],mx);
         sort(v.begin(),v.end());
-        return f(0,v,0);
+        for(int i=v.size()-1;~i;--i)
+        {
+            for(int j =mx;~j;--j)
+            {
+                 int u =0;
+                if(j<=v[i][1])
+                u = dp[i+1][max(v[i][1],j)]+v[i][0];
+                 dp[i][j]=max(dp[i+1][j],u); 
+
+            }
+        }
+        return dp[0][0];
     }
 };
