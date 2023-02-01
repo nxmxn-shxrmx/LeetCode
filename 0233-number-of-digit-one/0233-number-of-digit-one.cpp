@@ -22,7 +22,7 @@ public:
                 ct--;
                 continue;
             }
-            long long poe = pow(10,ct-1)+.25;
+            long long poe = pow(10,ct-1);
             long long sum = ct*poe;
             long long nex = (ct-1)*poe/10;
             long long rem = rev%10;
@@ -40,7 +40,7 @@ public:
                     u/=10;
                     a--;
                 }
-                long long l = pow(10,a)+0.25;
+                long long l = pow(10,a);
                 nex+=poe-1-(prev*l);
             }
             ans+=(sum-nex);
