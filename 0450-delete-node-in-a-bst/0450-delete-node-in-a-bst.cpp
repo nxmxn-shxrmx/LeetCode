@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    TreeNode* deleteT(TreeNode* r)
+    TreeNode* deleteT(TreeNode* &r)
     {
         if(r->left==NULL)return r->right;
         if(r->right==NULL)return r->left;
@@ -23,7 +23,7 @@ public:
         r->left = deleteNode(r->left,u->val);
         return r;
     }
-    TreeNode* deleteNode(TreeNode* root, int key) {
+    TreeNode* deleteNode(TreeNode* &root, int key) {
      if(root==NULL)return root;
      if(root->val==key)
         return deleteT(root);    
