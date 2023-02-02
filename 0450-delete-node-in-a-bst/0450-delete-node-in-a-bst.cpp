@@ -13,17 +13,15 @@ class Solution {
 public:
     TreeNode* deleteT(TreeNode* r)
     {
-        if(r->left==NULL && r->right==NULL)
-            return NULL;
-        
         if(r->left==NULL)return r->right;
         if(r->right==NULL)return r->left;
         
         TreeNode* u = r->left;
         while(u->right)
             u = u->right;
-        u->right = r->right;
-        return r->left;
+        r->val = u->val;
+        r->left = deleteNode(r->left,u->val);
+        return r;
     }
     TreeNode* deleteNode(TreeNode* root, int key) {
      if(root==NULL)return root;
