@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool checkInclusion(string &s1, string &s2) {
+    bool checkInclusion(string s1, string s2) {
         vector<int>v(26);
         for(auto c:s1)
             v[c-'a']++;
@@ -16,7 +16,6 @@ public:
                 if(v[s2[i]-'a']==0)break;
                 if(u[s2[i]-'a']==0)
                 {
-                    cout<<j<<" ";
                      int l = q[s2[i]-'a'].front();
                      for(j;j<=l&&j<s2.size();++j)
                      {
@@ -25,7 +24,6 @@ public:
                         u[s2[j]-'a']++;
                      }
                     j=l+1;
-                    cout<<j<<"\n";
                 }
                 u[s2[i]-'a']--;
                 q[s2[i]-'a'].push(i);
