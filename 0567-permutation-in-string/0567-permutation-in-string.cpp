@@ -8,7 +8,7 @@ public:
         for(int i = 0;i<s2.size();++i)
         {
             vector<int>u(v.begin(),v.end());
-            map<int,queue<int>>q;
+            vector<queue<int>>q(26);
             int p =0;
             int j = i;
             while(i<s2.size()&&p<s1.size())
