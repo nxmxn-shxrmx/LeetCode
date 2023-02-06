@@ -4,11 +4,11 @@ public:
         vector<int>v(26);
         for(auto c:s1)
             v[c-'a']++;
-        
+        unordered_map<int,queue<int>>q;
         for(int i = 0;i<s2.size();++i)
         {
             vector<int>u(v.begin(),v.end());
-            vector<queue<int>>q(26);
+            q.clear();
             int p =0;
             int j = i;
             while(i<s2.size()&&p<s1.size())
