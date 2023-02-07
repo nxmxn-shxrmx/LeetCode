@@ -2,7 +2,7 @@ class Solution {
 public:
     int totalFruit(vector<int>& fruits) {
        set<int>s;
-       unordered_map<int,int>m;
+       map<int,int>m;
        int ans = 0;
        int  ct = 0;
        for(int i = 0;i<fruits.size();++i)
