@@ -1,29 +1,34 @@
 class Solution {
 public:
     int totalFruit(vector<int>& fruits) {
-       set<int>s;
-       map<int,int>m;
-       int ans = 0;
-       int  ct = 0;
-       for(int i = 0;i<fruits.size();++i)
-       {
-           if(m.size()==2&&m.find(fruits[i])==m.end())
-           {
-              
-               m.erase(fruits[*s.begin()]);
-                ct = *s.begin()+1;
-               s.erase(*s.begin());
-           }
-           if(m.find(fruits[i])!=m.end())
-               s.erase(m[fruits[i]]);
-           m[fruits[i]]=i;
-           s.insert(i);
-           int p = i+1-ct;
-          ans = max(ans,p);
-       }
-       // cout<<ct<<"\n";
+        int first=0;
+        int second=0;
+        int first_el=-1;
+        int second_el=-1;
+        int ct = 0;
+        int ans = 0;
+        for(int i = 0;i<fruits.size();++i)
+        {
+            if(first_el==-1)first_el=fruits[i],first=i;
+            else if(second_el==-1 && fruits[i]!=first_el)second_el = fruits[i],second = i;
+            else if(first_el!=fruits[i]&&second_el!=fruits[i])
+            {
+                if(first>=second)
+                {
+                    swap(first,second);
+                    swap(first_el,second_el);
+                }
+                ct = first+1;
+                first=i;
+                first_el=fruits[i];
+            }
+            else if(first_el==fruits[i])first=i;
+            else if(second_el==fruits[i])second=i;
+            int p =i+1-ct;
+            ans = max(ans,p);
+            
+        }
         int p = fruits.size()-ct;
-        ans = max(ans,p);
-        return ans;
+        return max(ans,p);
     }
 };
