@@ -20,6 +20,7 @@ public:
             else if(fruits[first]==fruits[i])first=i;
             else if(fruits[second]==fruits[i])second=i;
             int p =i+1-ct;
+            if(ans>=(fruits.size()-ct))return ans;
             ans = max(ans,p);
             
         }
