@@ -16,7 +16,7 @@ public:
         k%=chalk.back();
         int lo = 0;
         int hi = r;
-        cout<<r<<"\n";
+       
         while(lo<hi)
         {
             int mid = (lo+hi)/2;
