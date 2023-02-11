@@ -1,83 +1,76 @@
 class Solution {
 public:
-    vector<int> shortestAlternatingPaths(int n, vector<vector<int>>& red, vector<vector<int>>& blue) {
-        
-        
-        vector<vector<int>>r(n),b(n);
-        queue<pair<int,int>>q;
-        map<pair<int,int>,bool>m;
-        for(auto c: red)
-            r[c[0]].push_back(c[1]);
-        for(auto c: blue)
-            b[c[0]].push_back(c[1]);
-    
-        
-        vector<int>h(n,-1);
-        h[0]= 0;
-        for(auto c:r[0])
+    vector<int> shortestAlternatingPaths(int n, vector<vector<int>>& redEdges, vector<vector<int>>& blueEdges) {
+     vector<vector<int>>blueG(n);
+     vector<vector<int>>redG(n);
+     for(auto c:blueEdges)
+            blueG[c[0]].push_back(c[1]);
+     for(auto c:redEdges)
+            redG[c[0]].push_back(c[1]);
+      
+    vector<int>ans(n,-1);
+    ans[0] = 0;
+    vector<bool>visR(n),visB(n);
+    queue<pair<int,int>>q;
+    q.push({0,0});
+    int ct = 0;
+    while(!q.empty())
+    {
+        int sz = q.size();
+        while(sz--)
         {
-            if(h[c]==-1 ||h[c]>h[0]+1)
-                h[c]=h[0]+1;
-               
-            if(!m[{c,0}])
-            q.push({c,0}),m[{c,0}]=true;
-        }
-        for(auto c:b[0])
-        {
-             if(h[c]==-1 ||h[c]>h[0]+1)
-                h[c]=h[0]+1;
-             
-        
-                if(!m[{c,1}])
-                q.push({c,1}),m[{c,1}]=true;
-    
-    
-        }
-        int st =2;
-        while(!q.empty())
-        {
-            int si = q.size();
-            
-            while(si--)
+            auto it = q.front();
+            q.pop();
+            if(it.first==0)
             {
-                int i = q.front().first;
-                int t = q.front().second;
-                q.pop();
-
-                if(t==0)
+                for(auto c:blueG[it.second])
                 {
-                
-                    for(auto c:b[i])
+                    if(!visR[c])
                     {
-                        if(h[c]==-1 || h[c]>st)
-                            h[c]=st;
-            
-                        if(m[{c,1}]==false)
-                        q.push({c,1}),m[{c,1}]=true;
-                    
+                        if(ans[c]==-1)ans[c]=INT_MAX;
+                        ans[c] = min(ans[c],ct+1);
+                        q.push({2,c});
                     }
                 }
-                else 
+                for(auto c:redG[it.second])
                 {
-                
-                    for(auto c:r[i])
+                    if(!visB[c])
                     {
-                   // cout<<t<<" "<<0<<" "<<c<<" "<<i<<"\n";
-                        if(h[c]==-1 ||h[c]>st)
-                            h[c]=st;
-            
-                        if(m[{c,0}]==false)
-                        q.push({c,0}),m[{c,0}]=true;
-                    
-    
+                        if(ans[c]==-1)ans[c]=INT_MAX;
+                        ans[c] = min(ans[c],ct+1);
+                        q.push({1,c});
                     }
                 }
             }
-            
-            st++;
-        
+            else if(it.first==1)
+            {
+                visR[it.second]=1;
+                for(auto c:blueG[it.second])
+                {
+                    if(!visB[c])
+                    {
+                        if(ans[c]==-1)ans[c]=INT_MAX;
+                        ans[c] = min(ans[c],ct+1);
+                        q.push({2,c});
+                    }
+                }
+            }
+            else
+            {
+                visB[it.second]=1;
+                for(auto c:redG[it.second])
+                {
+                    if(!visR[c])
+                    {
+                        if(ans[c]==-1)ans[c]=INT_MAX;
+                        ans[c] = min(ans[c],ct+1);
+                        q.push({1,c});
+                    }
+                }
+            }
         }
-
-     return h;   
+        ct++;
+    }
+    return ans;
     }
 };
