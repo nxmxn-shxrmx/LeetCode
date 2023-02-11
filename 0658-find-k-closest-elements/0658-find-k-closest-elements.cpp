@@ -13,12 +13,13 @@ public:
                 r =mid-1;
         }
         vector<int>ans;
+        vector<int>ans1;
         int cen = center+1;
         while(k--)
         {
             if(center==-1)
             {
-                ans.push_back(arr[cen]);
+                ans1.push_back(arr[cen]);
                 cen++;
             }
             else if(cen==arr.size())
@@ -35,12 +36,13 @@ public:
                 }
                 else
                 {
-                      ans.push_back(arr[cen]);
+                    ans1.push_back(arr[cen]);
                     cen++;
                 }
             }
         }
-        sort(ans.begin(),ans.end());
+        reverse(ans.begin(),ans.end());
+        for(auto c:ans1)ans.push_back(c);
         return ans;
     }
 };
