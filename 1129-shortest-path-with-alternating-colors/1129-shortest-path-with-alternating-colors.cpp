@@ -25,7 +25,7 @@ public:
             {
                 for(auto c:blueG[it.second])
                 {
-                    if(!visR[c])
+                    if(!visB[c])
                     {
                         if(ans[c]==-1)ans[c]=INT_MAX;
                         ans[c] = min(ans[c],ct+1);
@@ -34,7 +34,7 @@ public:
                 }
                 for(auto c:redG[it.second])
                 {
-                    if(!visB[c])
+                    if(!visR[c])
                     {
                         if(ans[c]==-1)ans[c]=INT_MAX;
                         ans[c] = min(ans[c],ct+1);
