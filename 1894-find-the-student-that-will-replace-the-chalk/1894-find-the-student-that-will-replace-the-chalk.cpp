@@ -1,17 +1,26 @@
 class Solution {
 public:
     int chalkReplacer(vector<int>& chalk, int k) {
-        vector<long long>v(chalk.size());
-        v[0]=chalk[0];
+        int r = chalk.size()-1;
         for(int i = 1;i<chalk.size();++i)
-            v[i]+=v[i-1]+chalk[i];
-        k%=v.back();
+        {
+            long long u = chalk[i]+chalk[i-1];
+            if(u>k)
+            {
+                r = i;
+                break;
+            }
+            chalk[i]+=chalk[i-1];
+        }
+        if(r==chalk.size()-1)
+        k%=chalk.back();
         int lo = 0;
-        int hi = chalk.size()-1;
+        int hi = r;
+        cout<<r<<"\n";
         while(lo<hi)
         {
             int mid = (lo+hi)/2;
-            if(v[mid]<=k)
+            if(chalk[mid]<=k)
                 lo=mid+1;
             else
                 hi=mid;
