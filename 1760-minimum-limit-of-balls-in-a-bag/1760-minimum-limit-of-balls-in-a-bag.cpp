@@ -11,8 +11,8 @@ public:
         return 1;
     }
     int minimumSize(vector<int>& nums, int maxOper) {
-    //    sort(nums.begin(),nums.end());
-         int hi = nums.back();
+    
+        int hi = nums.back();
         for(auto c:nums)
             hi =max(hi,c);
         int lo = 1;
