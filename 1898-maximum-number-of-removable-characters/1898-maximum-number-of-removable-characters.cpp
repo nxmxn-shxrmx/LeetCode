@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool check(int k,string s,string p,map<int,int>&v)
+    bool check(int k,string s,string p,unordered_map<int,int>&v)
     {
         int u = 0;
         for(int i = 0;i<s.size();++i)
@@ -17,7 +17,7 @@ public:
       int l =0;
       int r =removable.size();
       int ans =l;
-      map<int,int>v;
+      unordered_map<int,int>v;
       for(int i = 0;i<removable.size();++i)v[removable[i]]=i;
         
      while(l<=r)
