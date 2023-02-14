@@ -20,7 +20,8 @@ public:
         return m<=0;
     }
     int minDays(vector<int>& bloomDay, int m, int k) {
-
+        long long t = long(m)*long(k);
+        if((t)>bloomDay.size())return -1;
         int l =1;
         int r =1e9;
         int ans = r;
@@ -32,8 +33,6 @@ public:
             else
                 l = mi+1;
         }
-        if(check(ans,bloomDay,m,k))
         return ans;
-        return -1;
     }
 };
