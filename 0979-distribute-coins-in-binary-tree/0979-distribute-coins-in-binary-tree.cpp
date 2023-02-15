@@ -17,22 +17,8 @@ public:
         if(root==NULL)return 0;
         int l = f(root->left,root);
         int r = f(root->right,root);
-        
-        c+=l+r;
-        if(l<=(root->val))
-            root->val-=l,l=0;
-        else
-            l-=root->val,root->val=0;
-         if(r<=(root->val))
-            root->val-=r,r=0;
-        else
-            r-=root->val,root->val=0;
-        
-        pre->val +=max(0,root->val-1);
-        c+=max(0,root->val-1);
-        if(root->val==0)
-            l++;
-        return l+r;
+        c+=abs(l)+abs(r);
+        return root->val+l+r-1;
     }
     int distributeCoins(TreeNode* root) {
         TreeNode* pre = new TreeNode(-1); 
