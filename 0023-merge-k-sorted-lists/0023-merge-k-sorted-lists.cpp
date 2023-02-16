@@ -12,7 +12,7 @@ class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         
-        multiset<int>v;
+        priority_queue<int>v;
         ListNode* a = new  ListNode();
         ListNode* q = a;
         
@@ -21,14 +21,14 @@ public:
             ListNode* u = lists[i];
             while(u!=NULL)
             {
-                v.insert(u->val);
+                int p= u->val;
+                v.push(-p);
                 u = u->next;
             }
             
         }
-        for(auto it = v.begin();it!=v.end();++it)
-        {
-            a->next = new ListNode(*it);
+        while(!v.empty()){
+            a->next = new ListNode(-v.top()),v.pop();
             a = a->next;
         }
         return q->next;
