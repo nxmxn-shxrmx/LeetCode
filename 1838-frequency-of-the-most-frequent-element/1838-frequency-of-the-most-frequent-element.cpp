@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int check(int m,vector<int>&v,int k)
+    int check(vector<int>&v,int k)
     {
         int u =0;
         int j = v.size()-1;
@@ -26,19 +26,9 @@ public:
         return u;
     }
     int maxFrequency(vector<int>& nums, int k) {
-     int l = 0;
-     int r = nums.size();
-     int ans =0;
      sort(begin(nums),end(nums));
-     while(l<=r)
-     {
-         int m = (l+r)/2;
-         int u=check(m,nums,k);
-         if(u>=m)
-         l = u+1,ans=u;
-         else r = u-1;
-     }
-     return ans;   
+     return check(nums,k);
+  
     }
 };
 
