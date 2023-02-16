@@ -8,7 +8,7 @@ public:
         for(int i = v.size()-1;~i;--i)
         {
                 k-=(v[j]-v[i]);
-                if(k<0)
+                while(j>=i && k<0)
                 {
                     k +=(j-i)*(v[j]-v[j-1]);
                     j--;
@@ -17,7 +17,7 @@ public:
             
         }
         
-        return j+1;
+        return u;
     }
 };
 
