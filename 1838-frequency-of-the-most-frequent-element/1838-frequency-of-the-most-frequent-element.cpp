@@ -1,8 +1,9 @@
 class Solution {
 public:
-    int check(vector<int>&v,int k)
-    {
-        int u =0;
+
+    int maxFrequency(vector<int>& v, int k) {
+     sort(begin(v),end(v));
+     int u =0;
         int j = v.size()-1;
         for(int i = v.size()-1;~i;--i)
         {
@@ -24,11 +25,6 @@ public:
         }
         
         return u;
-    }
-    int maxFrequency(vector<int>& nums, int k) {
-     sort(begin(nums),end(nums));
-     return check(nums,k);
-  
     }
 };
 
