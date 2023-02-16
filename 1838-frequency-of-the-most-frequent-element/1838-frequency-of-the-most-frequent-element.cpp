@@ -23,7 +23,7 @@ public:
             }
         }
         
-        return m<=u;
+        return u;
     }
     int maxFrequency(vector<int>& nums, int k) {
      int l = 0;
@@ -33,8 +33,10 @@ public:
      while(l<=r)
      {
          int m = (l+r)/2;
-         if(check(m,nums,k))l = m+1,ans=m;
-         else r = m-1;
+         int u=check(m,nums,k);
+         if(u>=m)
+         l = u+1,ans=u;
+         else r = u-1;
      }
      return ans;   
     }
