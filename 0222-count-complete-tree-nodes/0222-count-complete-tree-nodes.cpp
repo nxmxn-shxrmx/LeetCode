@@ -16,14 +16,14 @@ public:
         int h1 = 0;
         int h2 = 0;
         TreeNode* r = root;
-        while(r->left)
+        while(r)
             h1++,r=r->left;
         r =root;
-        while(r->right)
+        while(r)
             h2++,r=r->right;
         
         if(h1==h2)
-            return pow(2,h1+1)+0.25-1;
+            return pow(2,h1)+0.25-1;
         return countNodes(root->left)+countNodes(root->right)+1;
     }
 };
