@@ -9,11 +9,11 @@ public:
             v[i].second = max(v[i].second,v[i-1].second);
         sort(worker.begin(),worker.end());
         int ans = 0;
+        int l = 0;
+        int p = -1;
         for(auto c:worker)
         {
-            int l =0;
             int r = v.size()-1;
-            int p = -1;
             while(l<=r)
             {
                 int m = (l+r)/2;
