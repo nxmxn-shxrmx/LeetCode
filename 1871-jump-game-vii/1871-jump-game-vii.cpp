@@ -1,6 +1,7 @@
 class Solution {
 public:
     bool canReach(string s, int minJump, int maxJump) {
+        if(s.back()=='1')return 0;
         queue<int>q;
         q.push(0);
         set<int>st;
