@@ -4,8 +4,6 @@ public:
         if(s.back()=='1')return 0;
         queue<int>q;
         q.push(0);
-        set<int>st;
-        for(int i =minJump;i<s.size();++i)if(s[i]=='0')st.insert(i);
         int l = 0;
         int r = 0;
         while(!q.empty())
