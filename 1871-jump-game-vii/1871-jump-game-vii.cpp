@@ -6,20 +6,19 @@ public:
         q.push(0);
         set<int>st;
         for(int i =minJump;i<s.size();++i)if(s[i]=='0')st.insert(i);
+        int l = 0;
+        int r = 0;
         while(!q.empty())
         {
             int i = q.front();
+           // cout<<i<<"\n";
             q.pop();
             if(i==s.size()-1)return 1;
-            auto it = st.lower_bound(i+minJump);
-            while(it!=st.end() && (*it)<=(i+maxJump))
-            {
-                auto p = it;
-                ++p;
-                q.push(*it);
-                st.erase(*it);
-                it = p;
-            }
+            l = max(i+minJump,r+1);
+            int n =s.size()-1;
+            for(int j = l;j<=min(i+maxJump,n);++j)
+                if(s[j]=='0')q.push(j);
+            r = i+maxJump;
         }
         return 0;
     }
