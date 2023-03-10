@@ -4,16 +4,19 @@ public:
         int p = 1;
         for(auto c:arr)
         {
-            while(p!=c)
+            if(p-c==0)p++;
+            else
             {
-                k--;
-                if(k==0)return p;
-                p++;
+                if((c-p)<k)
+                    k-=(c-p);
+                else
+                    return p+k-1;
+                
+                p =c+1;
             }
-            p++;
+            
         }
-        k--;
-        while(k--)p++;
+        p+=k-1;
         return p;
     }
 };
