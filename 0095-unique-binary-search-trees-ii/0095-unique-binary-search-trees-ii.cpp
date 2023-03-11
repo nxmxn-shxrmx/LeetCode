@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    map<string,vector<TreeNode*>>m;
+    unordered_map<string,vector<TreeNode*>>m;
     vector<TreeNode*>f(string s)
     {
         if(s.size()==0)
