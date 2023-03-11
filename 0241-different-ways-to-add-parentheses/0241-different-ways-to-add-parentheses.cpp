@@ -1,51 +1,38 @@
 class Solution {
 public:
-    vector<int>f(vector<string>v,int l,int r)
-    {
-        if(l==r)
-            return {stoi(v[l])};
-        
+    vector<int> diffWaysToCompute(string s) {
         vector<int>ans;
-        for(int i = l;i<=r;++i)
+        if(s.size()==0)return {};
+        for(int i = 0;i<s.size();++i)
         {
-            if(v[i]=="+" || v[i]=="-" || v[i]=="*")
+            if(s[i]=='+' || s[i]=='-' || s[i]=='*')
             {
-                vector<int>p = f(v,l,i-1);
-                vector<int>q = f(v,i+1,r);
+                vector<int>p = diffWaysToCompute(s.substr(0,i));
+                vector<int>q = diffWaysToCompute(s.substr(i+1));
+                
                 for(auto c:p)
                 {
                     for(auto x:q)
                     {
-                        if(v[i]=="+")
+                        if(s[i]=='+')
+                        {
                             ans.push_back(c+x);
-                        if(v[i]=="-")
+                        }
+                        if(s[i]=='-')
+                        {
                             ans.push_back(c-x);
-                        if(v[i]=="*")
+                        }if(s[i]=='*')
+                        {
                             ans.push_back(c*x);
+                        }
                     }
                 }
+                
             }
         }
+        if(ans.size()==0)
+            ans.push_back(stoi(s));
+        
         return ans;
-    }
-    vector<int> diffWaysToCompute(string s) {
-        vector<string>v;
-        for(int i=0;i<s.size();++i)
-        {
-            if(s[i]=='*' || s[i]=='+' || s[i]=='-')
-            {
-                string u= "";
-                u+=s[i];
-                v.push_back(u);
-                continue;
-            }
-            string u = "";
-            u+=s[i];
-            if(i+1<s.size() && s[i+1]>='0' && s[i+1]<='9')
-            u+=s[i+1],i+=1;
-            v.push_back(u);
-        }
-      
-        return f(v,0,v.size()-1);
     }
 };
