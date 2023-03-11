@@ -11,6 +11,7 @@
  */
 class Solution {
 public:
+    map<string,vector<TreeNode*>>m;
     vector<TreeNode*>f(string s)
     {
         if(s.size()==0)
@@ -20,9 +21,12 @@ public:
         vector<TreeNode*>p;
         for(int i = 0;i<s.size();++i)
         {
-            vector<TreeNode*>le = f(s.substr(0,i));
-            vector<TreeNode*>ri = f(s.substr(i+1));
-            
+            vector<TreeNode*>le;
+            if(m.find(s.substr(0,i))!=m.end())le = m[s.substr(0,i)];
+            else le = f(s.substr(0,i));
+            vector<TreeNode*>ri;  
+                if(m.find(s.substr(i+1))!=m.end())ri = m[s.substr(i+1)];
+            else ri = f(s.substr(i+1));
             for(auto c:le)
             {
                 for(auto x:ri)
