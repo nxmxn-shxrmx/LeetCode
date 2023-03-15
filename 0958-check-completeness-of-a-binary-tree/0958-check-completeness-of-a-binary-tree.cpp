@@ -43,19 +43,20 @@ public:
             q.pop();
             if(p->left &&k)return 0;
             if(p->left==NULL)k = 1;
-            else q.push(p->left);
+            else 
+            {
+                q.push(p->left); 
+                if(p->left->left || p->left->right)return 0;
+            }
             if(p->right && k)return 0;
             if(p->right ==NULL)k =1;
-            else q.push(p->right);
+            else 
+            { 
+                q.push(p->right);
+                 if(p->right->left || p->right->right)return 0;
+            }
         }
-        sz = q.size();
-        while(sz--)
-        {
-            TreeNode* p = q.front();
-            q.pop();
-            if(p->left)return 0;
-            if(p->right)return 0;
-        }
+        
         return 1;
     }
 };
