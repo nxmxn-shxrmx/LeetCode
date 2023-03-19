@@ -19,6 +19,7 @@ public:
     }
     
     void addWord(string word) {
+      
         TrieNode* cur = r;
         for(auto c:word)
         {
@@ -30,7 +31,7 @@ public:
         cur->end=1;
     }
     
-    bool f(int i,string w,TrieNode* cur)
+    bool f(int i,string &w,TrieNode* &cur)
     {
         if(i==w.size())return cur->end;
         if(w[i]=='.')
