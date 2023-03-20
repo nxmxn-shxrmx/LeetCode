@@ -11,9 +11,9 @@ public:
             ind[c[0]]++;
         }
         queue<int>q;
-        vector<int>ans;
+        int ans=0;
         for(int i = 0;i<n;++i)
-            if(ind[i]==0)q.push(i),ans.push_back(i);
+            if(ind[i]==0)q.push(i),ans++;
         if(q.empty())return 0;
         
         while(!q.empty())
@@ -24,9 +24,9 @@ public:
             for(auto c:v[i])
             {
                 ind[c]--;
-                if(ind[c]==0)q.push(c),ans.push_back(c);
+                if(ind[c]==0)q.push(c),ans++;
             }
         }
-        return ans.size()==n;
+        return ans==n;
     }
 };
