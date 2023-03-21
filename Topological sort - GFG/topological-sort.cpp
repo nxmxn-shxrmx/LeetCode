@@ -8,7 +8,7 @@ class Solution
 	public:
 	//Function to return list containing vertices in Topological order. 
 vector<bool>b;
-	stack<int>s;
+	vector<int>s;
 	void dfs(int i,vector<int>adj[])
 	{
 	    b[i]=true;
@@ -17,12 +17,13 @@ vector<bool>b;
 	        if(!b[c])
 	        dfs(c,adj);
 	    }
-	    s.push(i);
+	    s.push_back(i);
 	}
 	//Function to return list containing vertices in Topological order. 
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
 	    b.clear();
+	    s.clear();
 	    b = vector<bool>(V);
 	    for(int i = 0;i<V;++i)
 	    {
@@ -31,13 +32,9 @@ vector<bool>b;
 	            dfs(i,adj);
 	        }
 	    }
-	    vector<int>g;
-	    while(!s.empty())
-	    {
-	        g.push_back(s.top());
-	        s.pop();
-	    }
-	    return g;
+	   // for(auto c:s)cout<<c<<" ";
+	    reverse(s.begin(),s.end());
+	    return s;
 	}
 };
 
