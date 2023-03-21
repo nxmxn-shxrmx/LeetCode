@@ -29,14 +29,17 @@ class Solution
 	            int x = q.front().first;
 	            int y = q.front().second;
 	            q.pop();
-	            ans[x][y]=min(ans[x][y],st);
-	            g[x][y]=1;
+	            ans[x][y]=st;
 	            for(auto c:d)
 	            {
 	                if(x+c[0]>=0 && x+c[0]<g.size() && y+c[1]>=0 && y+c[1]<g[0].size() && g[x+c[0]][y+c[1]]==0)
+	                {   
+	                    g[c[0]+x][c[1]+y]=1;
 	                    q.push({x+c[0],y+c[1]});
+	                }
 	                    
 	            }
+	        
 	       
 	        }
 	        st++;
