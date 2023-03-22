@@ -10,16 +10,7 @@ class Solution {
   #define ll long long
   ll ans = 0;
   ll mod = 1e9+7;
-  void f(ll n,vector<vector<ll>>&pr)
-  {
-      if(n==-1)
-      {
-          ans = (ans+1)%mod;
-          return;
-      }
-      for(auto c:pr[n])
-      f(c,pr);
-  }
+
     int countPaths(int n, vector<vector<int>>& roads) {
         // code here
         ans = 0;
@@ -33,8 +24,8 @@ class Solution {
         }
         priority_queue<pair<ll,ll>>q;
         q.push({0,0});
-        vector<vector<ll>>pr(n);
-        pr[0] = {-1};
+        vector<ll>pr(n);
+        pr[0] = 1;
         
         while(!q.empty())
         {
@@ -50,20 +41,20 @@ class Solution {
             {
                 if(dis[c.first]>(dis[i]+c.second))
                 {
-                    pr[c.first].clear();
-                    pr[c.first].push_back(i);
+                
+                    pr[c.first]= pr[i]%mod;
                     dis[c.first]=dis[i]+c.second;
                     q.push({-dis[c.first],c.first});
                 }
                 else if(dis[c.first]==dis[i]+c.second)
                 {
-                    pr[c.first].push_back(i);
+                    pr[c.first]=  (pr[i]+pr[c.first])%mod;
                 }
             }
             
         }
-        f(n-1,pr);
-        return ans;
+        
+        return pr[n-1];
     }
 };
 
