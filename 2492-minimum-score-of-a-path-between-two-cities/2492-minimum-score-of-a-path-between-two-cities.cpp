@@ -10,7 +10,7 @@ public:
         vector<int>dis(n+1,INT_MAX);
         priority_queue<pair<int,int>>q;
         q.push({INT_MAX,1});
-        dis[1]=INT_MAX;
+        dis[1]=0;
         while(!q.empty())
         {
             int p = abs(q.top().first);
@@ -26,7 +26,9 @@ public:
             }
         }
     
-     
+        for(auto c:dis)
+            if(c!=0)
+            dis[n] = min(c,dis[n]);
         return dis[n];
     }
 };
