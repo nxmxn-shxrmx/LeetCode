@@ -1,40 +1,43 @@
 class Solution {
 public:
-    
-    vector<bool>b;
-    void dfs(int i,vector<vector<int>>&g)
+    vector<int>par;
+    vector<int>size;
+    int find(int i)
     {
-        if(b[i])
-            return;
-        
-        b[i]=true;
-        for(auto c:g[i])
-        {
-            if(!b[c])
-            dfs(c,g);
-        }
+        if(par[i]==-1)return par[i]=i;
+        if(par[i]==i)return i;
+        return par[i] =find(par[i]);
     }
-    int makeConnected(int n, vector<vector<int>>& c) {
-        b = vector<bool>(n);
-        vector<vector<int>>g(n);
+    int makeConnected(int n, vector<vector<int>>& connections) {
+        par = vector<int>(n,-1);
+        size = vector<int>(n,1);
+        if((n-1)>(connections.size()))return -1;
         
-        if(c.size()<n-1)
-            return -1;
-        
-        for(auto x:c)
+        int ct = 0;
+        for(auto c:connections)
         {
-            g[x[0]].push_back(x[1]);
-            g[x[1]].push_back(x[0]);
-        }
-        int t=0;
-        for(int i = 0;i<n;++i)
-        {
-            if(!b[i])
+            int u = find(c[0]);
+            int v = find(c[1]);
+            
+            if(u==v)
+                continue;
+            else
             {
-                t++;
-                dfs(i,g);
+                if(size[v]>size[u])swap(u,v);
+                par[v]=par[u];
+                size[u]+=size[v];
             }
         }
-         return t-1;
+        for(int i = 0;i<n;++i)
+        {
+            int g = find(i);
+            if(size[g]!=0)
+            {
+                size[g]=0;
+                ct++;
+            }
+        }
+        return ct-1;
+            
     }
 };
