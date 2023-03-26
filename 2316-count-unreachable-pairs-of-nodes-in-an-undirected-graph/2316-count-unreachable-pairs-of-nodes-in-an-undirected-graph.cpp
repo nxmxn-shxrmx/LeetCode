@@ -1,52 +1,42 @@
 class Solution {
 public:
-    vector<bool>b;
-    int dfs(int i,vector<vector<int>>&g)
+    long long ans = 0;
+    vector<int>par;
+    vector<int>size;
+    int find(int i)
     {
-        b[i]=true;
-        int k = 0;
-        for(auto c:g[i])
-        {
-            if(!b[c])
-            {
-            k+=    dfs(c,g);
-            
-            }
-        }
-        return k+1;
-        
+        if(par[i]==-1)
+            return par[i] =i;
+        if(par[i]==i)return i;
+        return par[i] =find(par[i]);
     }
-    long long countPairs(int n, vector<vector<int>>& e) {
-        if(e.size()==0)
-        {
-            n--;
-            long long p =n;
-            return  p*(p+1)/2;
-        }
-        vector<vector<int>>g(n);
-        b = vector<bool>(n);
+    long long countPairs(int n, vector<vector<int>>& edges) {
         
-        n--;
-        long long p = n;
-         p = p*(p+1)/2;
-        n++;
-        for(auto c:e)
+        par =vector<int>(n,-1);
+        size = vector<int>(n,1);
+        for(auto c:edges)
         {
-            g[c[0]].push_back(c[1]);
-            g[c[1]].push_back(c[0]);
-        }
-        
-        for(int i =0;i<n;++i)
-        {
-            if(!b[i])
+            int u= find(c[0]);
+            int v = find(c[1]);
+            if(u!=v)
             {
-                long long h=dfs(i,g);
-                h--;
-                h = h*(h+1)/2;
-                p-=h;
+                if(size[v]>size[u])swap(u,v);
+                size[u]+=size[v];
+                par[v] = u;
             }
         }
-        
-        return p;
+        int p = n;
+        for(int i = 0;i<n;++i)
+        {
+            if(size[find(i)])
+            {
+                long long u = p-size[find(i)];
+                long long v = size[find(i)];
+                ans = ans + u*v;
+                p-=size[find(i)];
+                size[find(i)]=0;
+            }
+        }
+        return ans;
     }
 };
