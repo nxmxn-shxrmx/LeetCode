@@ -43,15 +43,22 @@ public:
             edges[i]=-1;            
         }
         
-        vector<int>pos(edges.size(),-1);
+        // vector<int>pos(edges.size(),-1);
 
         for(int i = 0;i<edges.size();++i)
         {
             if(!b[i])
             {
-                pos[i]=0;
-                dfs(edges[i],edges,1,pos,b);
+                int c = 1;
                 b[i]=1;
+                int p = edges[i];
+                while(!b[p])
+                {
+                    b[p]=1;
+                    p = edges[p];
+                    c++;
+                }
+                ans = max(c,ans);
             }
                 
         }
