@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int ans = -1;
+     int ans = -1;
     void dfs(int c,vector<int>&edges,int i,vector<int>&pos,vector<int>&b)
     {
         
@@ -17,9 +17,34 @@ public:
         
     }
     int longestCycle(vector<int>& edges) {
-        vector<int>pos(edges.size(),-1);
+
+        
+        queue<int>q;
         vector<int>b(edges.size());
-    
+        vector<int>in(edges.size());
+        for(auto c:edges)
+        {
+            if(c==-1)continue;
+            in[c]++;
+        }
+        for(int i =0;i<in.size();++i)
+        {
+            if(in[i]==0)
+                q.push(i);
+        }
+        while(!q.empty())
+        {
+            int i = q.front();
+            b[i]=1;
+            q.pop();
+            if(edges[i]==-1)continue;
+            in[edges[i]]--;
+            if(in[edges[i]]==0)q.push(edges[i]);
+            edges[i]=-1;            
+        }
+        
+        vector<int>pos(edges.size(),-1);
+
         for(int i = 0;i<edges.size();++i)
         {
             if(!b[i])
@@ -30,6 +55,7 @@ public:
             }
                 
         }
+        
         return ans;
     }
 };
