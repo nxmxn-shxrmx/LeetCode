@@ -18,7 +18,8 @@ public:
     }
     int minimizeArrayValue(vector<int>& nums) {
         int l = 0;
-        int r = 1e9;
+        int r = INT_MIN;
+        for(auto c:nums)r = max(c,r);
         int ans =r;
         while(l<=r)
         {
