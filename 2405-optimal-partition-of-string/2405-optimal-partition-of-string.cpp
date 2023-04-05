@@ -2,16 +2,16 @@ class Solution {
 public:
     int partitionString(string s) {
         int c =0;
-        unordered_map<char,int>m;
+        vector<int>v(26);
         for(int i =0;i<s.size();++i)
         {
-            if(m[s[i]]!=0)
+            if(v[s[i]-'a']!=0)
             {
-                m.clear();
+                for(int i = 0;i<26;++i)v[i]=0;
                 c++;
-                m[s[i]]++;
+                v[s[i]-'a']++;
             }
-            else m[s[i]]++;
+            else v[s[i]-'a']++;
         }
         return c+1;
     }
