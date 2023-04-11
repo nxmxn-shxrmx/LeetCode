@@ -19,18 +19,13 @@ public:
             if(b>a)swap(a,b);
             if(c>a)swap(c,a);
             if(c>b)swap(b,c);
-            
             a-=2;
             b-=1;
-              //cout<<a<<" "<<b<<" "<<c<<"\n";
             if(b>a)swap(a,b);
             if(c>a)swap(c,a);
             if(c>b)swap(b,c);
     
         }
-
-        if(a==b && c==b)return p;
-        if(a<0 ||b<0 || c<0)return -1;
         if(a>2 || b>2 || c>2)return -1;
         return p;
     }
