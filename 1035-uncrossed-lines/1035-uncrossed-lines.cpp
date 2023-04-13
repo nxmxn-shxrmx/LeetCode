@@ -1,6 +1,6 @@
 class Solution {
 public:
-     int dp[501][501];
+    
 //     int f(int i,int j,vector<int>&v1,vector<int>&v2)
 //     {
 //         if(i==v1.size()|| j==v2.size())return 0;
@@ -11,7 +11,7 @@ public:
 //         return dp[i][j]=max(f(i,j+1,v1,v2),f(i+1,j,v1,v2));
 //     }
     int maxUncrossedLines(vector<int>& v1, vector<int>& v2) {
-        
+        vector<vector<int>>dp(v1.size()+1,vector<int>(v2.size()+1));
         for(int i =v1.size()-1;~i;--i)
         {
             for(int j = v2.size()-1;~j;--j)
