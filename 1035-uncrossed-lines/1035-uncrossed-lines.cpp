@@ -11,16 +11,18 @@ public:
 //         return dp[i][j]=max(f(i,j+1,v1,v2),f(i+1,j,v1,v2));
 //     }
     int maxUncrossedLines(vector<int>& v1, vector<int>& v2) {
-        vector<vector<int>>dp(v1.size()+1,vector<int>(v2.size()+1));
+        vector<int>pre(v2.size()+1);
+        vector<int>cur(v2.size()+1);
         for(int i =v1.size()-1;~i;--i)
         {
             for(int j = v2.size()-1;~j;--j)
             {
                 if(v1[i]==v2[j])
-                    dp[i][j] = max(dp[i+1][j+1]+1,max(dp[i][j+1],dp[i+1][j]));
-                else dp[i][j] = max(dp[i][j+1],dp[i+1][j]);
+                    cur[j] = max(pre[j+1]+1,max(cur[j+1],pre[j]));
+                else cur[j] = max(cur[j+1],pre[j]);
             }
+            pre =cur;
         }
-        return dp[0][0];
+        return cur[0];
     }
 };
