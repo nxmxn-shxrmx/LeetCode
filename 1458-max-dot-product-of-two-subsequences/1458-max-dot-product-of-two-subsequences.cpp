@@ -5,6 +5,20 @@ public:
     {
         if(i==v1.size()||j==v2.size())return 0; 
         if(dp[i][j]!=-1)return dp[i][j];
+        
+        if(v1[i]<0)
+        {
+            if(v2[j]<0)return dp[i][j]=max(f(i+1,j+1,v1,v2)+v1[i]*v2[j],max(f(i+1,j,v1,v2),f(i,j+1,v1,v2)));
+            
+            return dp[i][j] = max(f(i+1,j,v1,v2),f(i,j+1,v1,v2));
+        }
+        
+        if(v2[j]<0)
+        {
+            if(v1[i]<0)return dp[i][j]=max(f(i+1,j+1,v1,v2)+v1[i]*v2[j],max(f(i+1,j,v1,v2),f(i,j+1,v1,v2)));
+            
+            return dp[i][j] = max(f(i+1,j,v1,v2),f(i,j+1,v1,v2));
+        }
         return dp[i][j]=max(f(i+1,j+1,v1,v2)+v1[i]*v2[j],max(f(i+1,j,v1,v2),f(i,j+1,v1,v2)));
     }
     int maxDotProduct(vector<int>& v1, vector<int>& v2) {
