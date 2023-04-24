@@ -14,7 +14,7 @@ public:
     bool k = 0;
         
             
-    if(s[i]==s[j]&&((i==j)||(i-j<2)||check[j+1][i-1]))k =1;
+    if(s[i]==s[j]&&((i-j<2)||check[j+1][i-1]))k =1;
     if(k)
         check[j][i]=1;
     
