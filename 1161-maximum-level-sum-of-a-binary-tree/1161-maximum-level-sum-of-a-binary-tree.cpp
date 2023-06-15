@@ -13,7 +13,8 @@ class Solution {
 public:
     int maxLevelSum(TreeNode* root) {
         queue<TreeNode*>q;
-        set<pair<long long,int>>s;
+      int ans = 1;
+        long long l = INT_MIN;
         q.push(root);
         int i =1;
         while(!q.empty())
@@ -29,12 +30,15 @@ public:
                 if(it->right)q.push(it->right);
                 
             }
-            s.insert({-u,i});
+    if(l<u)
+    {
+        l= u;
+        ans =i;
+    }
             ++i;
         }
-        
-        auto it = *s.begin();
+     
       
-        return it.second;
+        return ans;
     }
 };
