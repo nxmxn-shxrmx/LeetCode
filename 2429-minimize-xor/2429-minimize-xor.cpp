@@ -3,7 +3,7 @@ public:
     int minimizeXor(int num1, int num2) {
         int ca = 0;
         int cb = 0;
-        vector<int>v(32);
+      
         for(int i= 0;i<32;++i)
         {
             if(num1&(1<<i))ca++;
@@ -16,13 +16,13 @@ public:
             {
                 cb--;
                 ans|=(1<<i);
-                v[i]=1;
+               
             }
         }
         int i =0;
         while(cb)
         {
-            if(v[i])
+            if((1<<i)&num1)
             {++i;
              continue;
             }
