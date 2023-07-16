@@ -1,6 +1,8 @@
 class Solution {
 public:
-    vector<vector<int>>ans;
+   int ans = 0;
+   int mod = 1e9+7;
+   map<int,int>m,b;
     int gcd(int a ,long long int b)
 {
    for(int i = 2;i<=30;++i)
@@ -9,25 +11,24 @@ public:
    }
         return 1;
 }
-    void f(int i,long long p,vector<int>&g,vector<int>&v)
+    void f(int i,long long p,long long g,vector<int>&v)
     {
         if(i==v.size())
         {
             if(p!=1)
-                ans.push_back(g);
+                ans = (ans%mod + g%mod)%mod;
+            
             return;
         }
         if(gcd(v[i],p)==1)
-        {
-            g.push_back(v[i]);
-            f(i+1,p*v[i],g,v);
-            g.pop_back();
-        }
+            f(i+1,p*v[i],(g%mod*m[v[i]])%mod,v);
+          
+        
         f(i+1,p,g,v);
     }
     int numberOfGoodSubsets(vector<int>& nums) {
     
-    map<int,int>m,b;
+  
     for(int i = 2;i<=30;++i)
     {
         bool p = 0;
@@ -63,26 +64,13 @@ public:
             if(m[c]==1)v.push_back(c);
         }
     }
-    vector<int>g;
-    f(0,1,g,v);
-        long long a = 0;
-        int mod = 1e9+7;
-    for(auto c:ans)
-    {
-        long long u = 1;
-        for(auto x:c)
-        {
-    
-            u= (u%mod*m[x])%mod;
-        }
-       
-        a = (a%mod + u%mod)%mod;
-    }
-     
+  
+    f(0,1,1,v);
     long long t =1;
     for(int i =0;i<m[1];++i)
         t =(t%mod *2)%mod;
-    a = (a%mod *t%mod)%mod;
-    return a%mod;  
+        
+    ans = (ans%mod *t%mod)%mod;
+    return ans;  
     }
 };
