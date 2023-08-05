@@ -39,7 +39,7 @@ public:
                 }
             }
         }
-        return ans;
+        return m[{l,r}]=ans;
         
     }
     vector<TreeNode*> generateTrees(int n) {
