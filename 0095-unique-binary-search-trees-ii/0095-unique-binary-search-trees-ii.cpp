@@ -11,40 +11,38 @@
  */
 class Solution {
 public:
-    unordered_map<string,vector<TreeNode*>>m;
-    vector<TreeNode*>f(string s)
+    map<pair<int,int>,vector<TreeNode*>>m;
+    vector<TreeNode*>f(int l,int r)
     {
-        if(s.size()==0)
-            return {NULL};
-        if(s.size()==1)
-            return {new TreeNode(s[0]-'0')};
-        vector<TreeNode*>p;
-        for(int i = 0;i<s.size();++i)
+        if(l>r)return {NULL};
+        
+        if(l==r)return {new TreeNode(l)};
+        
+        vector<TreeNode*>ans;
+        for(int i = l;i<=r;++i)
         {
             vector<TreeNode*>le;
-            if(m.find(s.substr(0,i))!=m.end())le = m[s.substr(0,i)];
-            else le = f(s.substr(0,i));
-            vector<TreeNode*>ri;  
-                if(m.find(s.substr(i+1))!=m.end())ri = m[s.substr(i+1)];
-            else ri = f(s.substr(i+1));
+            if(m.find({l,i-1})!=m.end())le = m[{l,i-1}];
+            else le = f(l,i-1);
+            vector<TreeNode*>ri;
+            if(m.find({i+1,r})!=m.end())ri = m[{i+1,r}];
+            else ri = f(i+1,r);
+            
             for(auto c:le)
             {
                 for(auto x:ri)
                 {
-                    TreeNode *q = new TreeNode(s[i]-'0');
-                    q->left = c;
-                    q->right = x;
-                    p.push_back(q);
-                    
+                    TreeNode* h =new TreeNode(i);
+                    h->left= c;
+                    h->right=x; 
+                    ans.push_back(h);
                 }
             }
         }
-        return p;
+        return ans;
+        
     }
     vector<TreeNode*> generateTrees(int n) {
-        string s = "";
-        for(int i =1;i<=n;++i)
-            s+=to_string(i);
-        return f(s);
+        return f(1,n);
     }
 };
