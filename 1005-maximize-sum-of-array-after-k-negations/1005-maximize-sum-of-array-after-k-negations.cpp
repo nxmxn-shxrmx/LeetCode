@@ -44,7 +44,7 @@ public:
                     if(i<las)
                         las = i;
                 }
-                cout<<sum<<" ";
+
             }
         }
         
