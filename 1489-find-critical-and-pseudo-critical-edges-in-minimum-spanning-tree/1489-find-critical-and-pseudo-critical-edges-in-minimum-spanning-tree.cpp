@@ -56,8 +56,6 @@ public:
         vector<int>v(n,-1);
         vector<int>siz(n,1);
         
-        vector<int>acc;
-        vector<int>non;
         for(int i = 0;i<edges.size();++i)
         {
             vector<int>c = edges[i];
@@ -69,30 +67,26 @@ public:
                 if(siz[p]>siz[u])swap(p,u);
                 sum+=c[2];
                 v[p]=u;
-                acc.push_back(i);
                 siz[u]+=siz[p];
             }
-            else non.push_back(i);
-        }
-        vector<vector<int>>ans(2);
-        for(auto c:acc)
-        {
-            int d = findMST(n,c,0,edges);
-            if(d>sum)
-                ans[0].push_back(edges[c][3]);
-            else if(d==sum)ans[1].push_back(edges[c][3]);
-            
-         //   cout<<d<<" "<<edges[c][3]<<"\n";
         }
         
-        for(auto c:non)
+        vector<vector<int>>ans(2);
+        for(int i = 0;i<edges.size();++i)
         {
-            int d = findMST(n,c,1,edges);
-            if(d==sum)
-                ans[1].push_back(edges[c][3]);
-           // cout<<d<<" "<<c<<"\n";
+            int d = findMST(n,i,0,edges);
+            if(d>sum)
+                ans[0].push_back(edges[i][3]);
+            
+            else
+            {
+                d = findMST(n,i,1,edges);
+                if(d==sum)ans[1].push_back(edges[i][3]);
+            }
         }
-        cout<<sum<<"\n";
+        
+    
+      //  cout<<sum<<"\n";
         return ans;
     }
 };
