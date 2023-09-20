@@ -10,14 +10,24 @@ public:
         
         sum-=x;
         
-        
+        int cur = 0;
         int ans = INT_MIN;
-        for(int i = 0,j =0;j<nums.size();++j)
+        for(int i = 0,j =0;j<nums.size();)
         {
-            sum-=nums[j];
-            while(i<=j && sum<0)
-                sum+=nums[i++];
-            if(sum==0)ans = max(ans,j+1-i);
+            if(cur+nums[j]==sum)
+            {
+                cur+=nums[j];
+                ans = max(ans,j-i+1);
+                j++;
+            }
+            else if(cur+nums[j]>sum)
+            {
+                if(i<=j)
+                cur-=nums[i++];
+                
+                else j++;
+            }
+            else cur+=nums[j++];
         }
         return ans ==INT_MIN?-1:nums.size()-ans;
     }
