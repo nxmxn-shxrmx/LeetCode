@@ -1,28 +1,21 @@
 class Solution {
 public:
     int hIndex(vector<int>& citations) {
-        vector<int>v(1001);
-        for(auto c:citations)v[c]++;
-        
+      
+        sort(citations.begin(),citations.end());
         int l = 0;
-        int r = citations.size();
+        int r = citations.size()-1;
         int ans  =0;
         while(l<=r)
         {
             int m = (l+r)/2;
-            int ct = 0;
-            for(int j = m;j<=1000;++j)
-            {
-                ct+=v[j];
-                if(ct>=m)break;
-            }
             
-            if(ct>=m)
+            if(citations[m]>=(citations.size()-m))
             {
-                ans = m;
-                l= m+1;
+                ans = citations.size()-m;
+                r= m-1;
             }
-            else r = m-1;
+            else l = m+1;
             
         }
         return ans;
