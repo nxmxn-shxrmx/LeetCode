@@ -1,19 +1,31 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        int maxi = prices[0];
-        int mini = prices[0];
-        int ans  = 0;
-        for(int i = 1;i<prices.size();++i)
+        int buy = INT_MAX;
+        int max_profit = 0;
+        int cur_max_profit = 0;
+        for(auto c:prices)
         {
-            if((maxi-mini>=prices[i])||maxi>=prices[i])
+            if(buy>=c)
             {
-                ans +=maxi-mini;
-                maxi = prices[i];
-                mini = prices[i];
+                max_profit += cur_max_profit;
+                cur_max_profit = 0;
+                buy = c;
             }
-            else maxi = prices[i];
+            else
+                
+            {
+                if((c-buy)>cur_max_profit)
+                    cur_max_profit = c-buy;
+                else
+                {
+                    max_profit += cur_max_profit;
+                    cur_max_profit = 0;
+                    buy=c;
+                }
+            }
+            
         }
-        return ans+maxi-mini;
+        return max_profit+cur_max_profit;
     }
 };
