@@ -1,26 +1,19 @@
 class Solution {
 public:
-    int maxProfit(vector<int>&v) {
-        int s=0;
-        int u =0;
-        int mi = INT_MAX;
-        for(auto c:v)
+    int maxProfit(vector<int>& prices) {
+        int maxi = prices[0];
+        int mini = prices[0];
+        int ans  = 0;
+        for(int i = 1;i<prices.size();++i)
         {
-            if(mi>=c)
-                mi =c,s+=u,u=0; 
-            else
+            if((maxi-mini>=prices[i])||maxi>=prices[i])
             {
-                if(c-mi<u)
-                {
-                    s+=u;
-                    mi =c;
-                    u=0;
-                }
-                else
-                u = c-mi;
+                ans +=maxi-mini;
+                maxi = prices[i];
+                mini = prices[i];
             }
-            
+            else maxi = prices[i];
         }
-        return s+u;
+        return ans+maxi-mini;
     }
 };
