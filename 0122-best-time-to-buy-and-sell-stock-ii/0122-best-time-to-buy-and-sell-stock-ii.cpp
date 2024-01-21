@@ -6,24 +6,14 @@ public:
         int cur_max_profit = 0;
         for(auto c:prices)
         {
-            if(buy>=c)
+            if(buy>=c || (c-buy)<=cur_max_profit)
             {
                 max_profit += cur_max_profit;
                 cur_max_profit = 0;
                 buy = c;
             }
             else
-                
-            {
-                if((c-buy)>cur_max_profit)
-                    cur_max_profit = c-buy;
-                else
-                {
-                    max_profit += cur_max_profit;
-                    cur_max_profit = 0;
-                    buy=c;
-                }
-            }
+                cur_max_profit = c-buy;
             
         }
         return max_profit+cur_max_profit;
