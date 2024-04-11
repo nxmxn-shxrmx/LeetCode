@@ -6,10 +6,9 @@ public:
         int k = m[0].size();
         int i = 0;
         int j = k-1;
-        while(true)
+        while(j>=0&&i<n)
         {
-            if(i==n || i==-1 || j==k || j==-1)
-                return false;
+        
             
             if(m[i][j]==t)
                 return true;
@@ -19,5 +18,6 @@ public:
             else
                 i++;
         }
+        return 0;
     }
 };
