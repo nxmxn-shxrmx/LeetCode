@@ -1,52 +1,44 @@
 class Solution {
 public:
-    vector<int> searchRange(vector<int>& n, int t) {
-        
+    int fir(vector<int>&nums,int target)
+    {
+        int fi = -1;
         int l = 0;
-        int r = n.size()-1;
-        
-        vector<int>v;
+        int r = nums.size()-1;
+      
         while(l<=r)
         {
             int m = (l+r)/2;
-            
-            if(n[m]==t)
-            {
-                if(m==0 || n[m-1]!=t)
-                {
-                    v.push_back(m);
-                    break;
-                }
-                else
-                    r = m-1;
-            }
-            else if(n[m]>t)
+            if(nums[m]>target)
                 r = m-1;
-            else
-                l = m+1;
+            else if(nums[m]==target)
+                fi = m,r = m-1;
+            else l++;
         }
-        if(v.size()==0)
-            return {-1,-1};
-         l=0;
-         r=n.size()-1;
-         while(l<=r)
+       return  fi;
+    }
+      int las(vector<int>&nums,int target)
+    {
+        int fi = -1;
+        int l = 0;
+        int r = nums.size()-1;
+      
+        while(l<=r)
         {
             int m = (l+r)/2;
-            if(n[m]==t)
-            {
-                if(m==n.size()-1 || n[m+1]!=t)
-                {
-                    v.push_back(m);
-                    break;
-                }
-                else
-                    l = m+1;
-            }
-            else if(n[m]>t)
+            if(nums[m]>target)
                 r = m-1;
-            else
-                l = m+1;
+            else if(nums[m]==target)
+                fi = m,l = m+1;
+            else l++;
         }
-     return v;   
+       return  fi;
+    }
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int fi =fir(nums,target);
+        int la = las(nums,target);
+        
+       return {fi,la};
+        
     }
 };
