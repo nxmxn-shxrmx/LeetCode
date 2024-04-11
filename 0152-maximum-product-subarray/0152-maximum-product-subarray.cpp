@@ -1,83 +1,67 @@
 class Solution {
 public:
     int maxProduct(vector<int>& nums) {
-        int t = 0;
-        int u = INT_MIN;
-        int p = 1;
-        int pr = 0;
+        int las = 1;
+        int cur = 1;
+        int ans = INT_MIN;
         for(auto c:nums)
         {
-            t*=c;
-            if(c==0)
+            if(c<0)
             {
-                u = max(u,c);
-                t = 0;
-                p = 1;
-                pr = 0;
-                continue;
-            }
-           
-            else if(t==0)
-                t = c;
-            if(t<0)
-            {
-                if(p==1)
+                cur*=las*c;
+                ans = max(ans,cur);
+                if(cur<0)
                 {
-                    p = 0;
-                    pr = t;
-                    t = 0;
-                    u = max(u,pr);
+                    las = cur;
+                    cur = 1;
+                    
                 }
                 else
-                {
-                    t*=pr;
-                    p=1;
-                    u=max(t,u);
-                }
+                las =1;
+            }
+            else if(c==0)
+            {
+                las=1;
+                cur=1;
+                ans = max(ans,0);
             }
             else
-                u= max(u,t);
-            
+            {
+                cur*=c;
+                ans = max(ans,cur);
+            }
         }
         reverse(nums.begin(),nums.end());
-         t = 0;
-        
-         p = 1;
-         pr = 0;
+          las = 1;
+        cur = 1;
+    
         for(auto c:nums)
         {
-            t*=c;
-            if(c==0)
+            if(c<0)
             {
-                u = max(u,c);
-                t = 0;
-                p = 1;
-                pr = 0;
-                continue;
-            }
-           
-            else if(t==0)
-                t = c;
-            if(t<0)
-            {
-                if(p==1)
+                cur*=las*c;
+                ans = max(ans,cur);
+                if(cur<0)
                 {
-                    p = 0;
-                    pr = t;
-                    t = 0;
-                    u = max(u,pr);
+                    las = cur;
+                    cur = 1;
+                    
                 }
                 else
-                {
-                    t*=pr;
-                    p=1;
-                    u=max(t,u);
-                }
+                las =1;
+            }
+            else if(c==0)
+            {
+                las=1;
+                cur=1;
+                ans = max(ans,0);
             }
             else
-                u= max(u,t);
-            
+            {
+                cur*=c;
+                ans = max(ans,cur);
+            }
         }
-     return u;   
+        return ans;
     }
 };
