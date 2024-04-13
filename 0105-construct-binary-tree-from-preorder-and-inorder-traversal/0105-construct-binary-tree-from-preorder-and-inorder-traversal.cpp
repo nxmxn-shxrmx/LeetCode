@@ -11,25 +11,28 @@
  */
 class Solution {
 public:
-    map<int,int>m;
-    TreeNode* f(vector<int>&pre,int &i,int l,int r)
+    TreeNode* f(vector<int>&pre,vector<int>&in,int l,int r,int &ind)
     {
-        if(l>r || i>=pre.size())return NULL;
+        if(ind==pre.size()||l>r)return NULL;
         
-        TreeNode* root = new TreeNode(pre[i]);
-        int pr = pre[i];
-    //    cout<<pr<<" "<<i<<"\n";
-        if(l<=m[pr]-1)
-        root->left= f(pre,++i,l,m[pr]-1);
-        if(m[pr]+1<=r)
-        root->right =f(pre,++i,m[pr]+1,r);
+        TreeNode* root = new TreeNode(pre[ind++]);
+        
+        int ans = l;
+        while(ans<=r)
+        {
+            if(in[ans]==root->val)
+                break;
+            ans++;
+        }
+        root->left = f(pre,in,l,ans-1,ind);
+        root->right = f(pre,in,ans+1,r,ind);
         return root;
     }
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        int l =0;
+        int r = inorder.size()-1;
         
-        for(int  i= 0;i<inorder.size();++i)
-        m[inorder[i]]=i;
-        int i = 0;
-        return f(preorder, i,0,preorder.size()-1);
-    }
+        int inx = 0;
+        return f(preorder,inorder,l,r,inx);
+ }
 };
