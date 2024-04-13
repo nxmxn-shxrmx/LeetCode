@@ -11,20 +11,19 @@
  */
 class Solution {
 public:
-    TreeNode* construct(vector<int>&pre,int &i,int ri)
+    TreeNode* construct(vector<int>&pre,int &i,int mx = INT_MAX)
     {
-        if(i>ri)return  NULL;
+        if(i>=pre.size()||pre[i]>mx)return  NULL;
         
         TreeNode* r = new TreeNode(pre[i++]);
         
-        int j= i;
-        while(j<=ri&&pre[j]<r->val)++j;
-        r->left  = construct(pre,i,j-1);
-        r->right =  construct(pre,i,ri);
+        
+        r->left  = construct(pre,i,r->val);
+        r->right =  construct(pre,i,mx);
         return r;
     }
     TreeNode* bstFromPreorder(vector<int>& preorder) {
      int i = 0;
-     return construct(preorder,i,preorder.size()-1);
+     return construct(preorder,i);
     }
 };
